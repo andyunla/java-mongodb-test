@@ -30,6 +30,6 @@ public class App
                 			.append("apellido", "Perez")
                 			.append("edad", 40);
         collection.insertOne(doc);
-        System.out.println("La base de datos ha sido cargada correctamente.");
+        System.out.println("The bomb has been planted!");
     }
 }
