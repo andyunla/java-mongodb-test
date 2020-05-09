@@ -1,4 +1,4 @@
-package com.company;
+package com.unla.test;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
@@ -20,12 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class App 
-{
+public class App {
     public static void main(String[] args) {
         MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017")); // Puerto por defecto        
-        MongoDatabase db = mongoClient.getDatabase("prueba");
-        MongoCollection<Document> collection = db.getCollection("alumno");
+        MongoDatabase db = mongoClient.getDatabase("farmacias");
+        
+        MongoCollection<Document> collection = db.getCollection("clientes");
         Document doc = new Document("nombre", "Juan")
                 			.append("apellido", "Perez")
                 			.append("edad", 40);

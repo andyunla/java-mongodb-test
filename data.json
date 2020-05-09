@@ -1,0 +1,97 @@
+[
+    {
+        "clientes": [
+            {
+                "nombre": "",
+                "apellido": "",
+                "dni": 0,
+                "domicilio": {
+                    "calle": "",
+                    "numero": "",
+                    "localidad": "",
+                    "provincia": ""
+                },
+                "obra_social": {
+                    "nombre": "",
+                    "nro_afiliado": 0
+                }
+            }
+        ],
+        "empleados": [
+            {
+                "nombre": "",
+                "apellido": "",
+                "dni": 0,
+                "cuil": "",
+                "domicilio": {
+                    "calle": "",
+                    "numero": "",
+                    "localidad": "",
+                    "provincia": ""
+                },
+                "obra_social": {
+                    "nombre": "",
+                    "nro_afiliado": 0
+                }
+            }
+        ]
+    },
+    {
+        "sucursal": {
+            "sucursal1" : {
+                "supervisor": 0,
+                "empleados": [
+                    0, 0
+                ],
+                "domicilio": {
+                    "calle": "",
+                    "numero": "",
+                    "localidad": "",
+                    "provincia": ""
+                }
+            }
+        }
+    },
+    {
+        "producto": {
+            "medicamento": [
+                {
+                    "descripcion": "",
+                    "laboratorio": "",
+                    "codigo": 0,
+                    "precio": 0.0
+                }
+            ],
+            "perfumeria": [
+                {
+                    "descripcion": "",
+                    "laboratorio": "",
+                    "codigo": 0,
+                    "precio": 0.0
+                }
+            ]
+        }
+    },
+    {
+        "ventas": [
+            {
+                "fecha": "",
+                "nro_ticket": "",
+                "foma_pago": "",
+                "productos": [
+                    {
+                        "nombre": "",
+                        "categoria": "",
+                        "precio": 0.0,
+                        "cantidad": 0
+                    }
+                ],
+                "empleados": {
+                    "atendido": 0,
+                    "cobrado": 0
+                },
+                "cliente": 0
+            }
+        ]
+    }
+]
