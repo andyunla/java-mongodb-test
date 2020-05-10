@@ -18,5 +18,13 @@ public class Empleado extends Persona {
 	public void setId(int id) {
 		this.id = id;
 	}
+
+	public String getCuil() {
+		return cuil;
+	}
+
+	public void setCuil(String cuil) {
+		this.cuil = cuil;
+	}
 }
 
