@@ -1,6 +1,7 @@
 package com.unla.test;
 
 import com.unla.datos.Cliente;
+import com.google.gson.Gson;
 import com.unla.dao.ClienteDao;
 
 public class AgregarCliente {
