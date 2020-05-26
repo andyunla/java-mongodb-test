@@ -66,4 +66,12 @@ public abstract class Persona {
 	public void setObraSocial(ObraSocial obraSocial) {
 		this.obraSocial = obraSocial;
 	}
+
+	@Override
+	public String toString() {
+		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", domicilio="
+				+ domicilio + ", obraSocial=" + obraSocial + "]";
+	}
+	
+	
 }
