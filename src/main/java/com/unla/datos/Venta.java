@@ -11,6 +11,7 @@ public class Venta {
 	private Empleado atentido;
 	private Empleado cobrado;
 	private Cliente cliente;
+	private double precioTotal;
 	
 	public Venta(LocalDate fecha, String nroTicket, String formaPago, List<Producto> listaProductos, Empleado atentido,
 			Empleado cobrado, Cliente cliente) {

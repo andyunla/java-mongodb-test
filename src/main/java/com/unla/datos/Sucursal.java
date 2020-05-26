@@ -2,17 +2,20 @@ package com.unla.datos;
 
 import java.util.List;
 
-public class sucursal {
+public class Sucursal {
 	private int id;
 	private Empleado supervisor;
 	private List<Empleado> listaEmpleados;
+	private List<Producto> listaProductos;
 	private Domicilio domicilio;
-	
-	public sucursal(int id, Empleado supervisor, List<Empleado> listaEmpleados, Domicilio domicilio) {
+
+	public Sucursal(int id, Empleado supervisor, List<Empleado> listaEmpleados, List<Producto> listaProductos,
+			Domicilio domicilio) {
 		super();
 		this.id = id;
 		this.supervisor = supervisor;
 		this.listaEmpleados = listaEmpleados;
+		this.listaProductos = listaProductos;
 		this.domicilio = domicilio;
 	}
 
@@ -46,5 +49,13 @@ public class sucursal {
 
 	public void setDomicilio(Domicilio domicilio) {
 		this.domicilio = domicilio;
+	}
+	
+	public List<Producto> getListaProductos() {
+		return listaProductos;
+	}
+
+	public void setListaProductos(List<Producto> listaProductos) {
+		this.listaProductos = listaProductos;
 	}
 }
