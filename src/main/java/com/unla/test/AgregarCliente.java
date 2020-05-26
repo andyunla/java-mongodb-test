@@ -9,8 +9,7 @@ public class AgregarCliente {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ClienteDao dao = ClienteDao.getInstance();
-		Cliente cliente = new Cliente("Juan", "Perez", "11222333", null);
+		Cliente cliente = new Cliente("Lucas", "Sanchez", "11222333", null);
 		dao.agregar(cliente);
-		System.out.println("Ejecutado");
 	}
 }

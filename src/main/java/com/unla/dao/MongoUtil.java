@@ -19,13 +19,6 @@ public class MongoUtil {
 		}
 	} 
 	
-	/* Implementar Luego
-	private void manejaExcepcion(Exception he) throws Exception {
-		tx.rollback();
-		throw new Exception("ERROR en la capa de acceso de datos", e);
-	}
-	*/
-	
 	public static MongoDatabase getDatabase() {
 		try {
 			iniciaOperacion();
@@ -35,7 +28,7 @@ public class MongoUtil {
 		return database;
 	}
 	
-	public static BSONObject jsonABSONObject(String json) {
+	public static BSONObject jsonToBSONObject(String json) {
 		return (BSONObject)com.mongodb.util.JSON.parse(json);
 	}
 }

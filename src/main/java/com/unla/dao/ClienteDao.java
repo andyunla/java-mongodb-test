@@ -49,7 +49,7 @@ public class ClienteDao {
 	
 	public List<Cliente> traer() {
 		List<Cliente> lista = new ArrayList<Cliente>();
-        FindIterable<Document> fi = collection.find();
+		FindIterable<Document> fi = collection.find();
         MongoCursor<Document> cursor = fi.iterator();
         try {
             while(cursor.hasNext()) {
@@ -61,10 +61,25 @@ public class ClienteDao {
 		return lista;
 	}
 	
+	public List<Cliente> traerV2() {
+		List<Cliente> lista = new ArrayList<Cliente>();
+		MongoCollection<Cliente> colleccion = db.getCollection("clientes", Cliente.class);
+		FindIterable<Cliente> fi = colleccion.find();
+        MongoCursor<Cliente> cursor = fi.iterator();
+        try {
+            while(cursor.hasNext()) {
+                lista.add(cursor.next());
+            }
+        } finally {
+            cursor.close();
+        }
+		return lista;
+	}
+	
 	public boolean agregar(Cliente objeto) {
 		boolean estado = false;
-		MongoCollection<Document> collection = db.getCollection("clientes");
-	    String json = gson.toJson(objeto);
+		// String json = gson.toJson(objeto);
+		String json = gson.toJsonTree(objeto).getAsJsonObject().remove("id").toString();
 		Document doc = new Document().parse(json);
 		try { // DEBUG: Agregar excepcion
 			collection.insertOne(doc);
@@ -82,7 +97,7 @@ public class ClienteDao {
 		
 		BasicDBObject newDocument = new BasicDBObject();
 		String json = gson.toJson(objetoModificado);
-		BSONObject bson = (BSONObject)com.mongodb.util.JSON.parse(json);
+		BSONObject bson = MongoUtil.jsonToBSONObject(json);
 		newDocument.putAll(bson);
 		BasicDBObject updateObject = new BasicDBObject();
 		updateObject.put("$set", newDocument);
