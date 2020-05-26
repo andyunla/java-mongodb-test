@@ -8,6 +8,7 @@ import java.util.Set;
 import org.bson.BSON;
 import org.bson.BSONObject;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
@@ -41,9 +42,18 @@ public class ClienteDao {
 		return gson.fromJson(json, Cliente.class);
 	}
 	
-	public Cliente traer(int dni) {
-		String json = "";
-		Cliente cliente = (Cliente) gson.fromJson(json, Cliente.class);
+	public Cliente traer(String dni) {
+		Cliente cliente=null;
+		String json = "{dni: '"+dni+"'}";
+		BSONObject bson = (BSONObject)com.mongodb.util.JSON.parse(json);
+		FindIterable<Document> traidos = collection.find((Bson) bson);
+		if(traidos==null) {
+			System.out.println("No hay ningun cliente con ese dni");
+		}
+		else {
+			MongoCursor<Document> cursor = traidos.iterator();
+			cliente = deserealizar(cursor.next().toJson());
+		}
 		return cliente;
 	}
 	
@@ -104,6 +114,7 @@ public class ClienteDao {
 
 		collection.updateOne(query, updateObject);
 		return estado;
+		
 	}
 	
 	public boolean eliminar(Cliente objeto) {
