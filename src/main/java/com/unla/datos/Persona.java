@@ -1,7 +1,6 @@
 package com.unla.datos;
 
 public abstract class Persona {
-	private int id;
 	private String nombre;
 	private String apellido;
 	private String dni;
@@ -17,14 +16,6 @@ public abstract class Persona {
 		this.dni = dni;
 		this.domicilio = domicilio;
 		this.obraSocial = obraSocial;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getNombre() {
@@ -69,7 +60,7 @@ public abstract class Persona {
 
 	@Override
 	public String toString() {
-		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", domicilio="
+		return "Persona [nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", domicilio="
 				+ domicilio + ", obraSocial=" + obraSocial + "]";
 	}
 	

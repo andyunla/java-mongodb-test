@@ -17,6 +17,9 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.MongoException;
+
 import com.unla.datos.Cliente;
 
 public class ClienteDao {
@@ -43,16 +46,16 @@ public class ClienteDao {
 	}
 	
 	public Cliente traer(String dni) {
-		Cliente cliente=null;
+		Cliente cliente = null;
 		String json = "{dni: '"+dni+"'}";
 		BSONObject bson = (BSONObject)com.mongodb.util.JSON.parse(json);
 		FindIterable<Document> traidos = collection.find((Bson) bson);
 		if(traidos==null) {
 			System.out.println("No hay ningun cliente con ese dni");
-		}
-		else {
+		} else {
 			MongoCursor<Document> cursor = traidos.iterator();
 			cliente = deserealizar(cursor.next().toJson());
+			cursor.close();
 		}
 		return cliente;
 	}
@@ -71,37 +74,13 @@ public class ClienteDao {
 		return lista;
 	}
 	
-	public List<Cliente> traerV2() {
-		List<Cliente> lista = new ArrayList<Cliente>();
-		MongoCollection<Cliente> colleccion = db.getCollection("clientes", Cliente.class);
-		FindIterable<Cliente> fi = colleccion.find();
-        MongoCursor<Cliente> cursor = fi.iterator();
-        try {
-            while(cursor.hasNext()) {
-                lista.add(cursor.next());
-            }
-        } finally {
-            cursor.close();
-        }
-		return lista;
-	}
-	
-	public boolean agregar(Cliente objeto) {
-		boolean estado = false;
-		// String json = gson.toJson(objeto);
-		String json = gson.toJsonTree(objeto).getAsJsonObject().remove("id").toString();
+	public void agregar(Cliente objeto) {
+		String json = gson.toJson(objeto);
 		Document doc = new Document().parse(json);
-		try { // DEBUG: Agregar excepcion
-			collection.insertOne(doc);
-			estado = true;
-		} catch(Exception e) {
-			estado = false;
-		}
-		return estado;
+		collection.insertOne(doc);
 	}
 	
-	public boolean modificar(Cliente objetoModificado) {
-		boolean estado = false;
+	public void modificar(Cliente objetoModificado) {
 		BasicDBObject query = new BasicDBObject();
 		query.put("dni", objetoModificado.getDni());
 		
@@ -113,14 +92,12 @@ public class ClienteDao {
 		updateObject.put("$set", newDocument);
 
 		collection.updateOne(query, updateObject);
-		return estado;
-		
 	}
 	
-	public boolean eliminar(Cliente objeto) {
-		boolean estado = false;
-		
-		
-		return estado;
+	public long eliminar(Cliente objeto) {
+		String json = "{dni: '" + objeto.getDni() + "'}";
+		BSONObject bson = (BSONObject)com.mongodb.util.JSON.parse(json);
+		DeleteResult result = collection.deleteOne((Bson)bson);
+		return result.getDeletedCount();
 	}
 }
