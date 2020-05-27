@@ -23,7 +23,7 @@ public class MongoUtil {
 		try {
 			iniciaOperacion();
 		} catch(Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("No se pudo conectar a la Base de datos: " + e.getMessage());
 		}
 		return database;
 	}
