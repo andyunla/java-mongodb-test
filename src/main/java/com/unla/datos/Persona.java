@@ -1,21 +1,23 @@
 package com.unla.datos;
 
+import com.unla.funciones.Funciones;
+
 public abstract class Persona {
 	private String nombre;
 	private String apellido;
-	private String dni;
+	private int dni;
 	private Domicilio domicilio;
 	private ObraSocial obraSocial;
 	
 	public Persona() {}
 
-	public Persona(String nombre, String apellido, String dni, Domicilio domicilio, ObraSocial obraSocial) {
+	public Persona(String nombre, String apellido, int dni, Domicilio domicilio, ObraSocial obraSocial) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.dni = dni;
 		this.domicilio = domicilio;
 		this.obraSocial = obraSocial;
+		setDni(dni);
 	}
 
 	public String getNombre() {
@@ -34,12 +36,16 @@ public abstract class Persona {
 		this.apellido = apellido;
 	}
 
-	public String getDni() {
+	public int getDni() {
 		return dni;
 	}
 
-	public void setDni(String dni) {
-		this.dni = dni;
+	public void setDni(int dni) {
+		if(Funciones.validarDni(dni)) {
+			this.dni = dni;
+		} else {
+			dni = 0;
+		}
 	}
 
 	public Domicilio getDomicilio() {

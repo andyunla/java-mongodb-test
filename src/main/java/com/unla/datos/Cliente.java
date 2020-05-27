@@ -5,11 +5,11 @@ public class Cliente extends Persona {
 	
 	public Cliente() {}
 	
-	public Cliente(String nombre, String apellido, String dni, Domicilio domicilio) {
+	public Cliente(String nombre, String apellido, int dni, Domicilio domicilio) {
 		super(nombre, apellido, dni, domicilio, null);
 	}
 	
-	public Cliente(String nombre, String apellido, String dni, Domicilio domicilio, ObraSocial obraSocial) {
+	public Cliente(String nombre, String apellido, int dni, Domicilio domicilio, ObraSocial obraSocial) {
 		super(nombre, apellido, dni, domicilio, obraSocial);
 	}
 
@@ -17,7 +17,5 @@ public class Cliente extends Persona {
 	public String toString() {
 		return "Cliente [toString()=" + super.toString() + "]";
 	}
-	
-	
 }
 

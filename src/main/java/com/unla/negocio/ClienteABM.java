@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.unla.dao.ClienteDao;
 import com.unla.datos.Cliente;
+import com.unla.funciones.Funciones;
 
 public class ClienteABM {
 	private static ClienteABM instancia = null;
@@ -20,7 +21,7 @@ public class ClienteABM {
 		return instancia;
 	}
 
-	public Cliente traer(String dni) {
+	public Cliente traer(int dni) {
 		return dao.traer(dni);
 	}
 
@@ -33,6 +34,8 @@ public class ClienteABM {
 		if(cliente != null) {
 			throw new Exception("Ya existe un cliente con ese DNI.");
 		}
+		if(Funciones.validarDni(objeto.getDni()) == false)
+			throw new Exception("El DNI ingresado no es válido.");
 		dao.agregar(objeto);
 	}
 

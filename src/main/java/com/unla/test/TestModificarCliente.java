@@ -6,7 +6,7 @@ import com.unla.negocio.ClienteABM;
 public class TestModificarCliente {
 	public static void main(String[] args) {
 		ClienteABM abm = ClienteABM.getInstance();
-		Cliente cliente = new Cliente("Pepe", "Pasdsa", "11222333743374773747347367467", null);
+		Cliente cliente = new Cliente("Pepe", "Pasdsa", 10000000, null);
 		try {
 			abm.eliminar(cliente);
 			System.out.println("Cliente modificado exitosamente");

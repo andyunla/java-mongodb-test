@@ -2,23 +2,17 @@ package com.unla.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import org.bson.BSON;
 import org.bson.BSONObject;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
 import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBCollection;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.DeleteResult;
-import com.mongodb.MongoException;
 
 import com.unla.datos.Cliente;
 
@@ -45,9 +39,9 @@ public class ClienteDao {
 		return gson.fromJson(json, Cliente.class);
 	}
 	
-	public Cliente traer(String dni) {
+	public Cliente traer(int dni) {
 		Cliente cliente = null;
-		String json = "{dni: '"+dni+"'}";
+		String json = "{dni: "+ dni +"}";
 		BSONObject bson = (BSONObject)com.mongodb.util.JSON.parse(json);
 		FindIterable<Document> traidos = collection.find((Bson) bson);
 		if(traidos==null) {

@@ -7,7 +7,7 @@ public class TestEliminarCliente {
 
 	public static void main(String[] args) {
 		ClienteABM abm = ClienteABM.getInstance();
-		Cliente cliente = new Cliente("Pepe", "Pasdsa", "11222333", null);
+		Cliente cliente = new Cliente("Pepe", "Pasdsa", 11222333, null);
 		try {
 			abm.eliminar(cliente);
 			System.out.println("Cliente eliminado exitosamente");
