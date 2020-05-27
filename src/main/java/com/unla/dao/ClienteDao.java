@@ -70,7 +70,7 @@ public class ClienteDao {
 	
 	public void agregar(Cliente objeto) {
 		String json = gson.toJson(objeto);
-		Document doc = new Document().parse(json);
+		Document doc = Document.parse(json);
 		collection.insertOne(doc);
 	}
 	
