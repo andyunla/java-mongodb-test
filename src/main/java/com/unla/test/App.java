@@ -23,7 +23,7 @@ import java.util.List;
 public class App {
     public static void main(String[] args) {
         MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017")); // Puerto por defecto        
-        MongoDatabase db = mongoClient.getDatabase("farmacias");
+        MongoDatabase db = mongoClient.getDatabase("farmacias_unla");
         
         MongoCollection<Document> collection = db.getCollection("clientes");
         Document doc = new Document("nombre", "Juan")

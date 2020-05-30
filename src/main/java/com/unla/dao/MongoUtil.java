@@ -17,7 +17,7 @@ public class MongoUtil {
 			mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:" + PORT));
 			database = mongoClient.getDatabase(DATABASE);
 		}
-	} 
+	}
 	
 	public static MongoDatabase getDatabase() {
 		try {

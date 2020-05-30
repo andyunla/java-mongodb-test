@@ -41,11 +41,7 @@ public abstract class Persona {
 	}
 
 	public void setDni(int dni) {
-		if(Funciones.validarDni(dni)) {
-			this.dni = dni;
-		} else {
-			dni = 0;
-		}
+		this.dni = dni;
 	}
 
 	public Domicilio getDomicilio() {

@@ -48,7 +48,8 @@ public class ClienteDao {
 			System.out.println("No hay ningun cliente con ese dni");
 		} else {
 			MongoCursor<Document> cursor = traidos.iterator();
-			cliente = deserealizar(cursor.next().toJson());
+			if(cursor.hasNext())
+				cliente = deserealizar(cursor.next().toJson());
 			cursor.close();
 		}
 		return cliente;
