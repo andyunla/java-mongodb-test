@@ -1,23 +1,13 @@
 package com.unla.datos;
 
 public class ObraSocial {
-	private int id;
 	private String nombre;
 	private int nroAfiliado;
 	
-	public ObraSocial(int id, String nombre, int nroAfiliado) {
+	public ObraSocial(String nombre, int nroAfiliado) {
 		super();
-		this.id = id;
 		this.nombre = nombre;
 		this.nroAfiliado = nroAfiliado;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getNombre() {

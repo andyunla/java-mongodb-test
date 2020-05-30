@@ -39,6 +39,7 @@
     {
         "sucursal": {
             "sucursal1" : {
+                "id": 0,
                 "supervisor": {
                     "nombre": "",
                     "apellido": "",
