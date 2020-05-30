@@ -47,14 +47,15 @@ public class SucursalDao {
 	
 	public Sucursal traer(int id) {
 		Sucursal sucursal = null;
-		String json = "{id: '"+id+"'}";
+		String json = "{id: " + id + "}";
 		BSONObject bson = (BSONObject)com.mongodb.util.JSON.parse(json);
 		FindIterable<Document> traidos = collection.find((Bson) bson);
 		if(traidos==null) {
 			System.out.println("No hay ninguna sucursal con ese id");
 		} else {
 			MongoCursor<Document> cursor = traidos.iterator();
-			sucursal = deserealizar(cursor.next().toJson());
+			if(cursor.hasNext())
+				sucursal = deserealizar(cursor.next().toJson());
 			cursor.close();
 		}
 		return sucursal;

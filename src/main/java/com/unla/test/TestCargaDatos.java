@@ -90,7 +90,7 @@ public class TestCargaDatos {
 			sucursalABM.agregar(new Sucursal(1001, empleadoABM.traer("20-20000002-2"), listaEmp2, listaProd2, new Domicilio("Calle 2", 3412, "José Marmol", "Buenos Aires")));
 			sucursalABM.agregar(new Sucursal(1002, empleadoABM.traer("20-20000003-2"), listaEmp3, listaProd3, new Domicilio("Calle 2", 3412, "José Marmol", "Buenos Aires")));
 		} catch(Exception e) {
-			System.out.println(e.getMessage());
+			System.out.println("ASDASD" + e.getMessage());
 		}
 	}
 }

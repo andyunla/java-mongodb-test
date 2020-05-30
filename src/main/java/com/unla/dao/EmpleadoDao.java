@@ -41,14 +41,15 @@ public class EmpleadoDao {
 	
 	public Empleado traer(String cuil) {
 		Empleado empleado = null;
-		String json = "{cuil: " + cuil + "}";
+		String json = "{cuil: '" + cuil + "'}";
 		BSONObject bson = (BSONObject)com.mongodb.util.JSON.parse(json);
 		FindIterable<Document> traidos = collection.find((Bson) bson);
 		if(traidos==null) {
 			System.out.println("No hay ningun empleado con ese cuil");
 		} else {
 			MongoCursor<Document> cursor = traidos.iterator();
-			empleado = deserealizar(cursor.next().toJson());
+			if(cursor.hasNext())
+				empleado = deserealizar(cursor.next().toJson());
 			cursor.close();
 		}
 		return empleado;
