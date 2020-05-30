@@ -39,38 +39,68 @@
     {
         "sucursal": {
             "sucursal1" : {
-                "supervisor": 0,
+                "supervisor": {
+                    "nombre": "",
+                    "apellido": "",
+                    "dni": 0,
+                    "cuil": "",
+                    "domicilio": {
+                        "calle": "",
+                        "numero": "",
+                        "localidad": "",
+                        "provincia": ""
+                    },
+                    "obra_social": {
+                        "nombre": "",
+                        "nro_afiliado": 0
+                    }
+                },
                 "empleados": [
-                    0, 0
+                    {
+                        "nombre": "",
+                        "apellido": "",
+                        "dni": 0,
+                        "cuil": "",
+                        "domicilio": {
+                            "calle": "",
+                            "numero": "",
+                            "localidad": "",
+                            "provincia": ""
+                        },
+                        "obra_social": {
+                            "nombre": "",
+                            "nro_afiliado": 0
+                        }
+                    }
                 ],
                 "domicilio": {
                     "calle": "",
                     "numero": "",
                     "localidad": "",
                     "provincia": ""
-                }
+                },
+                "productos": [
+                    {
+                        "tipoProducto": "",
+                        "descripcion": "",
+                        "laboratorio": "",
+                        "codigo": 0,
+                        "precio": 0.0
+                    }
+                ]
             }
         }
     },
     {
-        "producto": {
-            "medicamento": [
-                {
-                    "descripcion": "",
-                    "laboratorio": "",
-                    "codigo": 0,
-                    "precio": 0.0
-                }
-            ],
-            "perfumeria": [
-                {
-                    "descripcion": "",
-                    "laboratorio": "",
-                    "codigo": 0,
-                    "precio": 0.0
-                }
-            ]
-        }
+        "producto": [
+            {
+                "tipoProducto": "",
+                "descripcion": "",
+                "laboratorio": "",
+                "codigo": 0,
+                "precio": 0.0
+            }
+        ]
     },
     {
         "ventas": [
@@ -87,10 +117,54 @@
                     }
                 ],
                 "empleados": {
-                    "atendido": 0,
-                    "cobrado": 0
+                    "cobrador": {
+                        "nombre": "",
+                        "apellido": "",
+                        "dni": 0,
+                        "cuil": "",
+                        "domicilio": {
+                            "calle": "",
+                            "numero": "",
+                            "localidad": "",
+                            "provincia": ""
+                        },
+                        "obra_social": {
+                            "nombre": "",
+                            "nro_afiliado": 0
+                        }
+                    },
+                    "vendedor": {
+                        "nombre": "",
+                        "apellido": "",
+                        "dni": 0,
+                        "cuil": "",
+                        "domicilio": {
+                            "calle": "",
+                            "numero": "",
+                            "localidad": "",
+                            "provincia": ""
+                        },
+                        "obra_social": {
+                            "nombre": "",
+                            "nro_afiliado": 0
+                        }
+                    }
                 },
-                "cliente": 0
+                "cliente": {
+                    "nombre": "",
+                    "apellido": "",
+                    "dni": 0,
+                    "domicilio": {
+                        "calle": "",
+                        "numero": "",
+                        "localidad": "",
+                        "provincia": ""
+                    },
+                    "obra_social": {
+                        "nombre": "",
+                        "nro_afiliado": 0
+                    }
+                }
             }
         ]
     }

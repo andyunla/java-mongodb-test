@@ -35,4 +35,9 @@ public class ObraSocial {
 	public void setNroAfiliado(int nroAfiliado) {
 		this.nroAfiliado = nroAfiliado;
 	}
+
+	@Override
+	public String toString() {
+		return "ObraSocial [nombre=" + nombre + ", nroAfiliado=" + nroAfiliado + "]";
+	}
 }

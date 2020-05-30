@@ -1,29 +1,27 @@
 package com.unla.datos;
 
 public class Producto {
-	private int id;
+	private int codigo;
 	private String tipoProducto;
 	private String descripcion;
 	private String laboratorio;
-	private int codigo;
 	private double precio;
 	
-	public Producto(int id, String tipoProducto, String descripcion, String laboratorio, int codigo, double precio) {
+	public Producto(int codigo, String tipoProducto, String descripcion, String laboratorio, double precio) {
 		super();
-		this.id = id;
+		this.codigo = codigo;
 		this.tipoProducto = tipoProducto;
 		this.descripcion = descripcion;
 		this.laboratorio = laboratorio;
-		this.codigo = codigo;
 		this.precio = precio;
 	}
 
-	public int getId() {
-		return id;
+	public int getCodigo() {
+		return codigo;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 
 	public String getTipoProducto() {
@@ -50,14 +48,6 @@ public class Producto {
 		this.laboratorio = laboratorio;
 	}
 
-	public int getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
-
 	public double getPrecio() {
 		return precio;
 	}
@@ -65,4 +55,11 @@ public class Producto {
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
+
+	@Override
+	public String toString() {
+		return "Producto [codigo=" + codigo + ", tipoProducto=" + tipoProducto + ", descripcion=" + descripcion
+				+ ", laboratorio=" + laboratorio + ", precio=" + precio + "]";
+	}
+
 }
