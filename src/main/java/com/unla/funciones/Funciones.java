@@ -11,6 +11,16 @@ import java.util.Random;
 
 public class Funciones {
 	/**
+   	* Método para determinar si un nroTicket es del tamaño apropiado
+   	* @param nroTicket de tipo String
+   	* @return boolean
+   	*/
+	public static boolean validarNroTicket(String nroTicket) {
+		int size = nroTicket.length();
+		return (size>=12 && size<=13);
+	}
+	
+	/**
    	* Método que retorna una fecha de tipo LocalDate
    	* dado un String 
    	* @param fecha Tiene que ser del tipo "AAAA-MM-DD"
