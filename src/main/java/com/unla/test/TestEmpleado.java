@@ -1,6 +1,5 @@
 package com.unla.test;
 
-import com.unla.datos.Cliente;
 import com.unla.datos.Empleado;
 import com.unla.negocio.EmpleadoABM;
 
@@ -30,8 +29,8 @@ public class TestEmpleado {
 		// Modificar empleado dado su CUIL
 		// **********************************************
 		try {
-			abm.eliminar(new Empleado("Mario", "Marquez", 11222333, "20-11111111-9", null, null));
-			System.out.println("Cliente modificado exitosamente");
+			abm.modificar(new Empleado("Mario", "Marquez", 11222333, "20-11111111-9", null, null));
+			System.out.println("Empleado modificado exitosamente");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -40,7 +39,7 @@ public class TestEmpleado {
 		// **********************************************
 		try {
 			abm.eliminar(new Empleado("Mario", "Marquez", 11222333, "20-11111111-9", null, null));
-			System.out.println("Cliente modificado exitosamente");
+			System.out.println("Empleado modificado exitosamente");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
