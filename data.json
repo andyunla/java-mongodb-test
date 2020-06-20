@@ -1,24 +1,43 @@
-[
-    {
-        "clientes": [
-            {
+{
+    "clientes": [
+        {
+            "nombre": "",
+            "apellido": "",
+            "dni": 0,
+            "domicilio": {
+                "calle": "",
+                "numero": "",
+                "localidad": "",
+                "provincia": ""
+            },
+            "obraSocial": {
                 "nombre": "",
-                "apellido": "",
-                "dni": 0,
-                "domicilio": {
-                    "calle": "",
-                    "numero": "",
-                    "localidad": "",
-                    "provincia": ""
-                },
-                "obra_social": {
-                    "nombre": "",
-                    "nro_afiliado": 0
-                }
+                "nroAfiliado": 0
             }
-        ],
-        "empleados": [
+        }
+    ],
+    "empleados": [
+        {
+            "nombre": "",
+            "apellido": "",
+            "dni": 0,
+            "cuil": "",
+            "domicilio": {
+                "calle": "",
+                "numero": "",
+                "localidad": "",
+                "provincia": ""
+            },
+            "obraSocial": {
+                "nombre": "",
+                "nroAfiliado": 0
+            }
+        }
+    ],
+    "sucursales": [
             {
+            "id": 0,
+            "supervisor": {
                 "nombre": "",
                 "apellido": "",
                 "dni": 0,
@@ -29,18 +48,73 @@
                     "localidad": "",
                     "provincia": ""
                 },
-                "obra_social": {
+                "obraSocial": {
                     "nombre": "",
-                    "nro_afiliado": 0
+                    "nroAfiliado": 0
                 }
-            }
-        ]
-    },
-    {
-        "sucursal": {
-            "sucursal1" : {
-                "id": 0,
-                "supervisor": {
+            },
+            "empleados": [
+                {
+                    "nombre": "",
+                    "apellido": "",
+                    "dni": 0,
+                    "cuil": "",
+                    "domicilio": {
+                        "calle": "",
+                        "numero": "",
+                        "localidad": "",
+                        "provincia": ""
+                    },
+                    "obraSocial": {
+                        "nombre": "",
+                        "nroAfiliado": 0
+                    }
+                }
+            ],
+            "domicilio": {
+                "calle": "",
+                "numero": "",
+                "localidad": "",
+                "provincia": ""
+            },
+            "productos": [
+                {
+                    "tipoProducto": "",
+                    "descripcion": "",
+                    "laboratorio": "",
+                    "codigo": 0,
+                    "precio": 0.0
+                }
+            ]
+        }
+    ],
+    "productos": [
+        {
+            "tipoProducto": "",
+            "descripcion": "",
+            "laboratorio": "",
+            "codigo": 0,
+            "precio": 0.0
+        }
+    ],
+    "ventas": [
+        {
+            "fecha": "",
+            "nroTicket": "",
+            "fomaPago": "",
+            "detalleVentas": {
+                "producto" : {
+                    "tipoProducto": "",
+                    "descripcion": "",
+                    "laboratorio": "",
+                    "codigo": 0,
+                    "precio": 0.0
+                },
+                "cantidad": 0,
+                "subTotal": 0.0
+            },
+            "empleados": {
+                "cobrador": {
                     "nombre": "",
                     "apellido": "",
                     "dni": 0,
@@ -56,105 +130,11 @@
                         "nro_afiliado": 0
                     }
                 },
-                "empleados": [
-                    {
-                        "nombre": "",
-                        "apellido": "",
-                        "dni": 0,
-                        "cuil": "",
-                        "domicilio": {
-                            "calle": "",
-                            "numero": "",
-                            "localidad": "",
-                            "provincia": ""
-                        },
-                        "obra_social": {
-                            "nombre": "",
-                            "nro_afiliado": 0
-                        }
-                    }
-                ],
-                "domicilio": {
-                    "calle": "",
-                    "numero": "",
-                    "localidad": "",
-                    "provincia": ""
-                },
-                "productos": [
-                    {
-                        "tipoProducto": "",
-                        "descripcion": "",
-                        "laboratorio": "",
-                        "codigo": 0,
-                        "precio": 0.0
-                    }
-                ]
-            }
-        }
-    },
-    {
-        "producto": [
-            {
-                "tipoProducto": "",
-                "descripcion": "",
-                "laboratorio": "",
-                "codigo": 0,
-                "precio": 0.0
-            }
-        ]
-    },
-    {
-        "ventas": [
-            {
-                "fecha": "",
-                "nro_ticket": "",
-                "foma_pago": "",
-                "productos": [
-                    {
-                        "nombre": "",
-                        "categoria": "",
-                        "precio": 0.0,
-                        "cantidad": 0
-                    }
-                ],
-                "empleados": {
-                    "cobrador": {
-                        "nombre": "",
-                        "apellido": "",
-                        "dni": 0,
-                        "cuil": "",
-                        "domicilio": {
-                            "calle": "",
-                            "numero": "",
-                            "localidad": "",
-                            "provincia": ""
-                        },
-                        "obra_social": {
-                            "nombre": "",
-                            "nro_afiliado": 0
-                        }
-                    },
-                    "vendedor": {
-                        "nombre": "",
-                        "apellido": "",
-                        "dni": 0,
-                        "cuil": "",
-                        "domicilio": {
-                            "calle": "",
-                            "numero": "",
-                            "localidad": "",
-                            "provincia": ""
-                        },
-                        "obra_social": {
-                            "nombre": "",
-                            "nro_afiliado": 0
-                        }
-                    }
-                },
-                "cliente": {
+                "vendedor": {
                     "nombre": "",
                     "apellido": "",
                     "dni": 0,
+                    "cuil": "",
                     "domicilio": {
                         "calle": "",
                         "numero": "",
@@ -166,7 +146,22 @@
                         "nro_afiliado": 0
                     }
                 }
+            },
+            "cliente": {
+                "nombre": "",
+                "apellido": "",
+                "dni": 0,
+                "domicilio": {
+                    "calle": "",
+                    "numero": "",
+                    "localidad": "",
+                    "provincia": ""
+                },
+                "obra_social": {
+                    "nombre": "",
+                    "nro_afiliado": 0
+                }
             }
-        ]
-    }
-]
+        }
+    ]
+}
