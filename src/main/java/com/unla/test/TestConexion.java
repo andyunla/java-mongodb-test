@@ -4,5 +4,8 @@ import com.mongodb.client.MongoDatabase;
 import com.unla.dao.MongoUtil;
 
 public class TestConexion {
-	MongoDatabase db = MongoUtil.getDatabase();
+	static MongoDatabase db = null;
+	public static void main(String[] args) {
+		db =  MongoUtil.getDatabase();
+	}
 }

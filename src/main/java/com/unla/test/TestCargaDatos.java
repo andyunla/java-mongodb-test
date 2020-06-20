@@ -1,18 +1,22 @@
 package com.unla.test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.unla.datos.Cliente;
+import com.unla.datos.DetalleVenta;
 import com.unla.datos.Domicilio;
 import com.unla.datos.Empleado;
 import com.unla.datos.ObraSocial;
 import com.unla.datos.Producto;
 import com.unla.datos.Sucursal;
+import com.unla.datos.Venta;
 import com.unla.negocio.ClienteABM;
 import com.unla.negocio.EmpleadoABM;
 import com.unla.negocio.ProductoABM;
 import com.unla.negocio.SucursalABM;
+import com.unla.negocio.VentaABM;
 
 public class TestCargaDatos {
 
@@ -21,6 +25,7 @@ public class TestCargaDatos {
 		EmpleadoABM empleadoABM = EmpleadoABM.getInstance();
 		ProductoABM productoABM = ProductoABM.getInstance();
 		SucursalABM sucursalABM = SucursalABM.getInstance();
+		VentaABM ventaABM = VentaABM.getInstance();
 		try {
 			clienteABM.agregar(new Cliente("Damian", "Orzi", 10000001, new Domicilio("Calle 1", 1232, "Lanús", "Buenos Aires")));
 			clienteABM.agregar(new Cliente("Damian", "Orzi", 10000002, new Domicilio("Calle 2", 3412, "José Marmol", "Buenos Aires")));
@@ -90,7 +95,30 @@ public class TestCargaDatos {
 			sucursalABM.agregar(new Sucursal(1001, empleadoABM.traer("20-20000002-2"), listaEmp2, listaProd2, new Domicilio("Calle 2", 3412, "José Marmol", "Buenos Aires")));
 			sucursalABM.agregar(new Sucursal(1002, empleadoABM.traer("20-20000003-2"), listaEmp3, listaProd3, new Domicilio("Calle 2", 3412, "José Marmol", "Buenos Aires")));
 		} catch(Exception e) {
-			System.out.println("ASDASD" + e.getMessage());
+			System.out.println("Error: " + e.getMessage());
+		}
+		
+		// Creamos una lista de empleado
+		List<DetalleVenta> ventas1 = new ArrayList<DetalleVenta>();
+		int cant1 = 3, cant2 = 2;
+		ventas1.add(new DetalleVenta(productoABM.traer(1), cant1, productoABM.traer(1).getPrecio() * cant1));
+		ventas1.add(new DetalleVenta(productoABM.traer(4), cant2, productoABM.traer(4).getPrecio() * cant2));
+		// Sucursal 2
+		List<DetalleVenta> ventas2 = new ArrayList<DetalleVenta>();
+		cant1 = 3; cant2 = 2;
+		ventas2.add(new DetalleVenta(productoABM.traer(3), cant1, productoABM.traer(3).getPrecio() * cant1));
+		ventas2.add(new DetalleVenta(productoABM.traer(5), cant2, productoABM.traer(5).getPrecio() * cant2));
+		// Sucursal 3
+		List<DetalleVenta> ventas3 = new ArrayList<DetalleVenta>();
+		cant1 = 3; cant2 = 2;
+		ventas3.add(new DetalleVenta(productoABM.traer(3), cant1, productoABM.traer(3).getPrecio() * cant1));
+		ventas3.add(new DetalleVenta(productoABM.traer(5), cant2, productoABM.traer(5).getPrecio() * cant2));
+		try {
+			ventaABM.agregar(new Venta(LocalDate.now(), "0001-00000001", "CREDITO", ventas1, empleadoABM.traer("20-20000004-2"), empleadoABM.traer("20-20000005-2"), clienteABM.traer(10000001)));
+			ventaABM.agregar(new Venta(LocalDate.now(), "0002-00000002", "DEBITO", ventas2, empleadoABM.traer("20-20000006-2"), empleadoABM.traer("20-20000007-2"), clienteABM.traer(10000004)));
+			ventaABM.agregar(new Venta(LocalDate.now(), "0003-00000003", "DEBITO", ventas3, empleadoABM.traer("20-20000008-2"), empleadoABM.traer("20-20000009-2"), clienteABM.traer(10000005)));
+		} catch(Exception e) {
+			System.out.println("Error: " + e.getMessage());
 		}
 	}
 }

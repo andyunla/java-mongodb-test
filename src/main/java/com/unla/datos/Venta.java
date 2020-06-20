@@ -7,21 +7,21 @@ public class Venta {
 	private LocalDate fecha;
 	private String nroTicket;
 	private String formaPago;
-	private List<Producto> listaProductos;
-	private Empleado atentido;
-	private Empleado cobrado;
+	private List<DetalleVenta> detalleVentas;
+	private Empleado vendedor;
+	private Empleado cobrador;
 	private Cliente cliente;
 	private double precioTotal;
 	
-	public Venta(LocalDate fecha, String nroTicket, String formaPago, List<Producto> listaProductos, Empleado atentido,
-			Empleado cobrado, Cliente cliente) {
+	public Venta(LocalDate fecha, String nroTicket, String formaPago, List<DetalleVenta> detalleVentas, Empleado vendedor,
+			Empleado cobrador, Cliente cliente) {
 		super();
 		this.fecha = fecha;
 		this.nroTicket = nroTicket;
 		this.formaPago = formaPago;
-		this.listaProductos = listaProductos;
-		this.atentido = atentido;
-		this.cobrado = cobrado;
+		this.detalleVentas = detalleVentas;
+		this.vendedor = vendedor;
+		this.cobrador = cobrador;
 		this.cliente = cliente;
 	}
 
@@ -49,28 +49,28 @@ public class Venta {
 		this.formaPago = formaPago;
 	}
 
-	public List<Producto> getListaProductos() {
-		return listaProductos;
+	public List<DetalleVenta> getDetalleVentas() {
+		return detalleVentas;
 	}
 
-	public void setListaProductos(List<Producto> listaProductos) {
-		this.listaProductos = listaProductos;
+	public void setDetalleVentas(List<DetalleVenta> detalleVentas) {
+		this.detalleVentas = detalleVentas;
 	}
 
-	public Empleado getAtentido() {
-		return atentido;
+	public Empleado getVendedor() {
+		return vendedor;
 	}
 
-	public void setAtentido(Empleado atentido) {
-		this.atentido = atentido;
+	public void setVendedor(Empleado vendedor) {
+		this.vendedor = vendedor;
 	}
 
-	public Empleado getCobrado() {
-		return cobrado;
+	public Empleado getCobrador() {
+		return cobrador;
 	}
 
-	public void setCobrado(Empleado cobrado) {
-		this.cobrado = cobrado;
+	public void setCobrador(Empleado cobrador) {
+		this.cobrador = cobrador;
 	}
 
 	public Cliente getCliente() {
@@ -79,5 +79,13 @@ public class Venta {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public double getPrecioTotal() {
+		return precioTotal;
+	}
+
+	public void setPrecioTotal(double precioTotal) {
+		this.precioTotal = precioTotal;
 	}
 }

@@ -31,7 +31,7 @@ public class SucursalDao {
 	protected SucursalDao() {
 		gson = new Gson();
 		db = MongoUtil.getDatabase();
-		collection = db.getCollection("sucursal");
+		collection = db.getCollection("sucursales");
 	}
 	
 	public static SucursalDao getInstance() {

@@ -40,7 +40,7 @@ public class VentaABM
             throw new Exception("Ya existe el ticket con el nroTicket.");
         }
         if (!Funciones.validarNroTicket(objeto.getNroTicket())) {
-            throw new Exception("El nroTicket ingresado no es válido.");
+            throw new Exception("El nroTicket ingresado no es vï¿½lido.");
         }
         VentaABM.dao.agregar(objeto);
     }

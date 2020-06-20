@@ -38,14 +38,15 @@ public class VentaDao {
 	
 	public Venta traer(String nroTicket) {
 		Venta venta = null;
-		String json = "{nroTicket: "+ nroTicket +"}";
+		String json = "{nroTicket: '" + nroTicket + "'}";
 		BSONObject bson = (BSONObject)com.mongodb.util.JSON.parse(json);
 		FindIterable<Document> traidos = collection.find((Bson) bson);
 		if(traidos==null) {
 			System.out.println("No hay ningun venta con este nroTicket");
 		} else {
 			MongoCursor<Document> cursor = traidos.iterator();
-			venta = deserealizar(cursor.next().toJson());
+			if(cursor.hasNext())
+				venta = deserealizar(cursor.next().toJson());
 			cursor.close();
 		}
 		return venta;
