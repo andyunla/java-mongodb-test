@@ -1,167 +1,855 @@
 {
     "clientes": [
         {
-            "nombre": "",
-            "apellido": "",
-            "dni": 0,
-            "domicilio": {
-                "calle": "",
-                "numero": "",
-                "localidad": "",
-                "provincia": ""
-            },
-            "obraSocial": {
-                "nombre": "",
-                "nroAfiliado": 0
+            "_id" : ObjectId("5ef02983889ca02622fc1d82"),
+            "nombre" : "Damian",
+            "apellido" : "Orzi",
+            "dni" : 10000001,
+            "domicilio" : {
+                "calle" : "Calle 1",
+                "numero" : 1232,
+                "localidad" : "Lan�s",
+                "provincia" : "Buenos Aires"
+            }
+        },
+        {
+            "_id" : ObjectId("5ef02983889ca02622fc1d83"),
+            "nombre" : "Damian",
+            "apellido" : "Orzi",
+            "dni" : 10000002,
+            "domicilio" : {
+                "calle" : "Calle 2",
+                "numero" : 3412,
+                "localidad" : "Jos� Marmol",
+                "provincia" : "Buenos Aires"
+            }
+        },
+        {
+            "_id" : ObjectId("5ef02983889ca02622fc1d84"),
+            "nombre" : "Damian",
+            "apellido" : "Orzi",
+            "dni" : 10000003,
+            "domicilio" : {
+                "calle" : "Calle 3",
+                "numero" : 231,
+                "localidad" : "Adrogu�",
+                "provincia" : "Buenos Aires"
+            }
+        },
+        {
+            "_id" : ObjectId("5ef02983889ca02622fc1d85"),
+            "nombre" : "Damian",
+            "apellido" : "Orzi",
+            "dni" : 10000004,
+            "domicilio" : {
+                "calle" : "Calle 4",
+                "numero" : 43,
+                "localidad" : "Varela",
+                "provincia" : "Buenos Aires"
+            }
+        },
+        {
+            "_id" : ObjectId("5ef02983889ca02622fc1d86"),
+            "nombre" : "Damian",
+            "apellido" : "Orzi",
+            "dni" : 10000005,
+            "domicilio" : {
+                "calle" : "Calle 5",
+                "numero" : 2312,
+                "localidad" : "Temperley",
+                "provincia" : "Buenos Aires"
+            }
+        },
+        {
+            "_id" : ObjectId("5ef02983889ca02622fc1d87"),
+            "nombre" : "Damian",
+            "apellido" : "Orzi",
+            "dni" : 10000006,
+            "domicilio" : {
+                "calle" : "Calle 6",
+                "numero" : 344,
+                "localidad" : "Gerli",
+                "provincia" : "Buenos Aires"
+            }
+        },
+        {
+            "_id" : ObjectId("5ef02983889ca02622fc1d88"),
+            "nombre" : "Damian",
+            "apellido" : "Orzi",
+            "dni" : 10000007,
+            "domicilio" : {
+                "calle" : "Calle 7",
+                "numero" : 122,
+                "localidad" : "Lan�s",
+                "provincia" : "Buenos Aires"
+            }
+        },
+        {
+            "_id" : ObjectId("5ef02983889ca02622fc1d89"),
+            "nombre" : "Damian",
+            "apellido" : "Orzi",
+            "dni" : 10000008,
+            "domicilio" : {
+                "calle" : "Calle 8",
+                "numero" : 6656,
+                "localidad" : "Lan�s",
+                "provincia" : "Buenos Aires"
+            }
+        },
+        {
+            "_id" : ObjectId("5ef02983889ca02622fc1d8a"),
+            "nombre" : "Damian",
+            "apellido" : "Orzi",
+            "dni" : 10000009,
+            "domicilio" : {
+                "calle" : "Calle 9",
+                "numero" : 8770,
+                "localidad" : "Banfield",
+                "provincia" : "Buenos Aires"
+            }
+        },
+        {
+            "_id" : ObjectId("5ef02983889ca02622fc1d8b"),
+            "nombre" : "Damian",
+            "apellido" : "Orzi",
+            "dni" : 10000010,
+            "domicilio" : {
+                "calle" : "Calle 10",
+                "numero" : 344,
+                "localidad" : "Longchamps",
+                "provincia" : "Buenos Aires"
             }
         }
     ],
     "empleados": [
         {
-            "nombre": "",
-            "apellido": "",
-            "dni": 0,
-            "cuil": "",
-            "domicilio": {
-                "calle": "",
-                "numero": "",
-                "localidad": "",
-                "provincia": ""
+            "_id" : ObjectId("5ef02983889ca02622fc1d8c"),
+            "cuil" : "20-20000001-2",
+            "nombre" : "Manuel",
+            "apellido" : "Sanchez",
+            "dni" : 20000001,
+            "domicilio" : {
+                "calle" : "Calle 2",
+                "numero" : 3412,
+                "localidad" : "Jos� Marmol",
+                "provincia" : "Buenos Aires"
             },
-            "obraSocial": {
-                "nombre": "",
-                "nroAfiliado": 0
+            "obraSocial" : {
+                "nombre" : "PAMI",
+                "nroAfiliado" : 1254
+            }
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1d8d"),
+            "cuil" : "20-20000002-2",
+            "nombre" : "Manuel",
+            "apellido" : "Sanchez",
+            "dni" : 20000002,
+            "domicilio" : {
+                "calle" : "Calle 2",
+                "numero" : 3412,
+                "localidad" : "Jos� Marmol",
+                "provincia" : "Buenos Aires"
+            },
+            "obraSocial" : {
+                "nombre" : "PAMI",
+                "nroAfiliado" : 1254
+            }
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1d8e"),
+            "cuil" : "20-20000003-2",
+            "nombre" : "Manuel",
+            "apellido" : "Sanchez",
+            "dni" : 20000003,
+            "domicilio" : {
+                "calle" : "Calle 2",
+                "numero" : 3412,
+                "localidad" : "Jos� Marmol",
+                "provincia" : "Buenos Aires"
+            },
+            "obraSocial" : {
+                "nombre" : "PAMI",
+                "nroAfiliado" : 1254
+            }
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1d8f"),
+            "cuil" : "20-20000004-2",
+            "nombre" : "Manuel",
+            "apellido" : "Sanchez",
+            "dni" : 20000004,
+            "domicilio" : {
+                "calle" : "Calle 2",
+                "numero" : 3412,
+                "localidad" : "Jos� Marmol",
+                "provincia" : "Buenos Aires"
+            },
+            "obraSocial" : {
+                "nombre" : "PAMI",
+                "nroAfiliado" : 1254
+            }
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1d90"),
+            "cuil" : "20-20000005-2",
+            "nombre" : "Manuel",
+            "apellido" : "Sanchez",
+            "dni" : 20000005,
+            "domicilio" : {
+                "calle" : "Calle 2",
+                "numero" : 3412,
+                "localidad" : "Jos� Marmol",
+                "provincia" : "Buenos Aires"
+            },
+            "obraSocial" : {
+                "nombre" : "PAMI",
+                "nroAfiliado" : 1254
+            }
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1d91"),
+            "cuil" : "20-20000006-2",
+            "nombre" : "Manuel",
+            "apellido" : "Sanchez",
+            "dni" : 20000006,
+            "domicilio" : {
+                "calle" : "Calle 2",
+                "numero" : 3412,
+                "localidad" : "Jos� Marmol",
+                "provincia" : "Buenos Aires"
+            },
+            "obraSocial" : {
+                "nombre" : "PAMI",
+                "nroAfiliado" : 1254
+            }
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1d92"),
+            "cuil" : "20-20000007-2",
+            "nombre" : "Manuel",
+            "apellido" : "Sanchez",
+            "dni" : 20000007,
+            "domicilio" : {
+                "calle" : "Calle 2",
+                "numero" : 3412,
+                "localidad" : "Jos� Marmol",
+                "provincia" : "Buenos Aires"
+            },
+            "obraSocial" : {
+                "nombre" : "PAMI",
+                "nroAfiliado" : 1254
+            }
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1d93"),
+            "cuil" : "20-20000008-2",
+            "nombre" : "Manuel",
+            "apellido" : "Sanchez",
+            "dni" : 20000008,
+            "domicilio" : {
+                "calle" : "Calle 2",
+                "numero" : 3412,
+                "localidad" : "Jos� Marmol",
+                "provincia" : "Buenos Aires"
+            },
+            "obraSocial" : {
+                "nombre" : "PAMI",
+                "nroAfiliado" : 1254
+            }
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1d94"),
+            "cuil" : "20-20000009-2",
+            "nombre" : "Manuel",
+            "apellido" : "Sanchez",
+            "dni" : 20000009,
+            "domicilio" : {
+                "calle" : "Calle 2",
+                "numero" : 3412,
+                "localidad" : "Jos� Marmol",
+                "provincia" : "Buenos Aires"
+            },
+            "obraSocial" : {
+                "nombre" : "PAMI",
+                "nroAfiliado" : 1254
             }
         }
     ],
     "sucursales": [
             {
-            "id": 0,
-            "supervisor": {
-                "nombre": "",
-                "apellido": "",
-                "dni": 0,
-                "cuil": "",
-                "domicilio": {
-                    "calle": "",
-                    "numero": "",
-                    "localidad": "",
-                    "provincia": ""
-                },
-                "obraSocial": {
-                    "nombre": "",
-                    "nroAfiliado": 0
-                }
-            },
-            "empleados": [
-                {
-                    "nombre": "",
-                    "apellido": "",
-                    "dni": 0,
-                    "cuil": "",
-                    "domicilio": {
-                        "calle": "",
-                        "numero": "",
-                        "localidad": "",
-                        "provincia": ""
+                "_id" : ObjectId("5ef02984889ca02622fc1d9f"),
+                "id" : 1000,
+                "supervisor" : {
+                    "cuil" : "20-20000001-2",
+                    "nombre" : "Manuel",
+                    "apellido" : "Sanchez",
+                    "dni" : 20000001,
+                    "domicilio" : {
+                        "calle" : "Calle 2",
+                        "numero" : 3412,
+                        "localidad" : "Jos� Marmol",
+                        "provincia" : "Buenos Aires"
                     },
-                    "obraSocial": {
-                        "nombre": "",
-                        "nroAfiliado": 0
+                    "obraSocial" : {
+                        "nombre" : "PAMI",
+                        "nroAfiliado" : 1254
                     }
+                },
+                "listaEmpleados" : [
+                    {
+                        "cuil" : "20-20000004-2",
+                        "nombre" : "Manuel",
+                        "apellido" : "Sanchez",
+                        "dni" : 20000004,
+                        "domicilio" : {
+                            "calle" : "Calle 2",
+                            "numero" : 3412,
+                            "localidad" : "Jos� Marmol",
+                            "provincia" : "Buenos Aires"
+                        },
+                        "obraSocial" : {
+                            "nombre" : "PAMI",
+                            "nroAfiliado" : 1254
+                        }
+                    },
+                    {
+                        "cuil" : "20-20000005-2",
+                        "nombre" : "Manuel",
+                        "apellido" : "Sanchez",
+                        "dni" : 20000005,
+                        "domicilio" : {
+                            "calle" : "Calle 2",
+                            "numero" : 3412,
+                            "localidad" : "Jos� Marmol",
+                            "provincia" : "Buenos Aires"
+                        },
+                        "obraSocial" : {
+                            "nombre" : "PAMI",
+                            "nroAfiliado" : 1254
+                        }
+                    }
+                ],
+                "listaProductos" : [
+                    {
+                        "codigo" : 1,
+                        "tipoProducto" : "perfumeria",
+                        "descripcion" : "perfume",
+                        "laboratorio" : "Antonio Banderas",
+                        "precio" : 50
+                    },
+                    {
+                        "codigo" : 4,
+                        "tipoProducto" : "medicamento",
+                        "descripcion" : "Actron",
+                        "laboratorio" : "Bayer",
+                        "precio" : 100
+                    },
+                    {
+                        "codigo" : 5,
+                        "tipoProducto" : "medicamento",
+                        "descripcion" : "Actron",
+                        "laboratorio" : "Bayer",
+                        "precio" : 100
+                    }
+                ],
+                "domicilio" : {
+                    "calle" : "Calle 2",
+                    "numero" : 3412,
+                    "localidad" : "Jos� Marmol",
+                    "provincia" : "Buenos Aires"
                 }
-            ],
-            "domicilio": {
-                "calle": "",
-                "numero": "",
-                "localidad": "",
-                "provincia": ""
             },
-            "productos": [
-                {
-                    "tipoProducto": "",
-                    "descripcion": "",
-                    "laboratorio": "",
-                    "codigo": 0,
-                    "precio": 0.0
+            {
+                "_id" : ObjectId("5ef02984889ca02622fc1da0"),
+                "id" : 1001,
+                "supervisor" : {
+                    "cuil" : "20-20000002-2",
+                    "nombre" : "Manuel",
+                    "apellido" : "Sanchez",
+                    "dni" : 20000002,
+                    "domicilio" : {
+                        "calle" : "Calle 2",
+                        "numero" : 3412,
+                        "localidad" : "Jos� Marmol",
+                        "provincia" : "Buenos Aires"
+                    },
+                    "obraSocial" : {
+                        "nombre" : "PAMI",
+                        "nroAfiliado" : 1254
+                    }
+                },
+                "listaEmpleados" : [
+                    {
+                        "cuil" : "20-20000006-2",
+                        "nombre" : "Manuel",
+                        "apellido" : "Sanchez",
+                        "dni" : 20000006,
+                        "domicilio" : {
+                            "calle" : "Calle 2",
+                            "numero" : 3412,
+                            "localidad" : "Jos� Marmol",
+                            "provincia" : "Buenos Aires"
+                        },
+                        "obraSocial" : {
+                            "nombre" : "PAMI",
+                            "nroAfiliado" : 1254
+                        }
+                    },
+                    {
+                        "cuil" : "20-20000007-2",
+                        "nombre" : "Manuel",
+                        "apellido" : "Sanchez",
+                        "dni" : 20000007,
+                        "domicilio" : {
+                            "calle" : "Calle 2",
+                            "numero" : 3412,
+                            "localidad" : "Jos� Marmol",
+                            "provincia" : "Buenos Aires"
+                        },
+                        "obraSocial" : {
+                            "nombre" : "PAMI",
+                            "nroAfiliado" : 1254
+                        }
+                    }
+                ],
+                "listaProductos" : [
+                    {
+                        "codigo" : 2,
+                        "tipoProducto" : "perfumeria",
+                        "descripcion" : "perfume",
+                        "laboratorio" : "Antonio Banderas",
+                        "precio" : 50
+                    },
+                    {
+                        "codigo" : 6,
+                        "tipoProducto" : "medicamento",
+                        "descripcion" : "Actron",
+                        "laboratorio" : "Bayer",
+                        "precio" : 100
+                    },
+                    {
+                        "codigo" : 7,
+                        "tipoProducto" : "medicamento",
+                        "descripcion" : "Actron",
+                        "laboratorio" : "Bayer",
+                        "precio" : 100
+                    }
+                ],
+                "domicilio" : {
+                    "calle" : "Calle 2",
+                    "numero" : 3412,
+                    "localidad" : "Jos� Marmol",
+                    "provincia" : "Buenos Aires"
                 }
-            ]
-        }
+            },
+            {
+                "_id" : ObjectId("5ef02984889ca02622fc1da1"),
+                "id" : 1002,
+                "supervisor" : {
+                    "cuil" : "20-20000003-2",
+                    "nombre" : "Manuel",
+                    "apellido" : "Sanchez",
+                    "dni" : 20000003,
+                    "domicilio" : {
+                        "calle" : "Calle 2",
+                        "numero" : 3412,
+                        "localidad" : "Jos� Marmol",
+                        "provincia" : "Buenos Aires"
+                    },
+                    "obraSocial" : {
+                        "nombre" : "PAMI",
+                        "nroAfiliado" : 1254
+                    }
+                },
+                "listaEmpleados" : [
+                    {
+                        "cuil" : "20-20000008-2",
+                        "nombre" : "Manuel",
+                        "apellido" : "Sanchez",
+                        "dni" : 20000008,
+                        "domicilio" : {
+                            "calle" : "Calle 2",
+                            "numero" : 3412,
+                            "localidad" : "Jos� Marmol",
+                            "provincia" : "Buenos Aires"
+                        },
+                        "obraSocial" : {
+                            "nombre" : "PAMI",
+                            "nroAfiliado" : 1254
+                        }
+                    },
+                    {
+                        "cuil" : "20-20000009-2",
+                        "nombre" : "Manuel",
+                        "apellido" : "Sanchez",
+                        "dni" : 20000009,
+                        "domicilio" : {
+                            "calle" : "Calle 2",
+                            "numero" : 3412,
+                            "localidad" : "Jos� Marmol",
+                            "provincia" : "Buenos Aires"
+                        },
+                        "obraSocial" : {
+                            "nombre" : "PAMI",
+                            "nroAfiliado" : 1254
+                        }
+                    }
+                ],
+                "listaProductos" : [
+                    {
+                        "codigo" : 3,
+                        "tipoProducto" : "perfumeria",
+                        "descripcion" : "perfume",
+                        "laboratorio" : "Antonio Banderas",
+                        "precio" : 50
+                    },
+                    {
+                        "codigo" : 8,
+                        "tipoProducto" : "medicamento",
+                        "descripcion" : "Actron",
+                        "laboratorio" : "Bayer",
+                        "precio" : 100
+                    },
+                    {
+                        "codigo" : 9,
+                        "tipoProducto" : "medicamento",
+                        "descripcion" : "Actron",
+                        "laboratorio" : "Bayer",
+                        "precio" : 100
+                    },
+                    {
+                        "codigo" : 10,
+                        "tipoProducto" : "medicamento",
+                        "descripcion" : "Actron",
+                        "laboratorio" : "Bayer",
+                        "precio" : 100
+                    }
+                ],
+                "domicilio" : {
+                    "calle" : "Calle 2",
+                    "numero" : 3412,
+                    "localidad" : "Jos� Marmol",
+                    "provincia" : "Buenos Aires"
+                }
+            }
     ],
     "productos": [
         {
-            "tipoProducto": "",
-            "descripcion": "",
-            "laboratorio": "",
-            "codigo": 0,
-            "precio": 0.0
+            "_id" : ObjectId("5ef02984889ca02622fc1d95"),
+            "codigo" : 1,
+            "tipoProducto" : "perfumeria",
+            "descripcion" : "perfume",
+            "laboratorio" : "Antonio Banderas",
+            "precio" : 50
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1d96"),
+            "codigo" : 2,
+            "tipoProducto" : "perfumeria",
+            "descripcion" : "perfume",
+            "laboratorio" : "Antonio Banderas",
+            "precio" : 50
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1d97"),
+            "codigo" : 3,
+            "tipoProducto" : "perfumeria",
+            "descripcion" : "perfume",
+            "laboratorio" : "Antonio Banderas",
+            "precio" : 50
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1d98"),
+            "codigo" : 4,
+            "tipoProducto" : "medicamento",
+            "descripcion" : "Actron",
+            "laboratorio" : "Bayer",
+            "precio" : 100
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1d99"),
+            "codigo" : 5,
+            "tipoProducto" : "medicamento",
+            "descripcion" : "Actron",
+            "laboratorio" : "Bayer",
+            "precio" : 100
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1d9a"),
+            "codigo" : 6,
+            "tipoProducto" : "medicamento",
+            "descripcion" : "Actron",
+            "laboratorio" : "Bayer",
+            "precio" : 100
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1d9b"),
+            "codigo" : 7,
+            "tipoProducto" : "medicamento",
+            "descripcion" : "Actron",
+            "laboratorio" : "Bayer",
+            "precio" : 100
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1d9c"),
+            "codigo" : 8,
+            "tipoProducto" : "medicamento",
+            "descripcion" : "Actron",
+            "laboratorio" : "Bayer",
+            "precio" : 100
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1d9d"),
+            "codigo" : 9,
+            "tipoProducto" : "medicamento",
+            "descripcion" : "Actron",
+            "laboratorio" : "Bayer",
+            "precio" : 100
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1d9e"),
+            "codigo" : 10,
+            "tipoProducto" : "medicamento",
+            "descripcion" : "Actron",
+            "laboratorio" : "Bayer",
+            "precio" : 100
         }
     ],
     "ventas": [
         {
-            "fecha": "",
-            "nroTicket": "",
-            "fomaPago": "",
-            "detalleVentas": {
-                "producto" : {
-                    "tipoProducto": "",
-                    "descripcion": "",
-                    "laboratorio": "",
-                    "codigo": 0,
-                    "precio": 0.0
-                },
-                "cantidad": 0,
-                "subTotal": 0.0
+            "_id" : ObjectId("5ef02984889ca02622fc1da2"),
+            "fecha" : {
+                "year" : 2020,
+                "month" : 6,
+                "day" : 22
             },
-            "empleados": {
-                "cobrador": {
-                    "nombre": "",
-                    "apellido": "",
-                    "dni": 0,
-                    "cuil": "",
-                    "domicilio": {
-                        "calle": "",
-                        "numero": "",
-                        "localidad": "",
-                        "provincia": ""
+            "nroTicket" : "0001-00000001",
+            "formaPago" : "CREDITO",
+            "detalleVentas" : [
+                {
+                    "producto" : {
+                        "codigo" : 1,
+                        "tipoProducto" : "perfumeria",
+                        "descripcion" : "perfume",
+                        "laboratorio" : "Antonio Banderas",
+                        "precio" : 50
                     },
-                    "obra_social": {
-                        "nombre": "",
-                        "nro_afiliado": 0
-                    }
+                    "cantidad" : 3,
+                    "subTotal" : 150
                 },
-                "vendedor": {
-                    "nombre": "",
-                    "apellido": "",
-                    "dni": 0,
-                    "cuil": "",
-                    "domicilio": {
-                        "calle": "",
-                        "numero": "",
-                        "localidad": "",
-                        "provincia": ""
+                {
+                    "producto" : {
+                        "codigo" : 4,
+                        "tipoProducto" : "medicamento",
+                        "descripcion" : "Actron",
+                        "laboratorio" : "Bayer",
+                        "precio" : 100
                     },
-                    "obra_social": {
-                        "nombre": "",
-                        "nro_afiliado": 0
-                    }
+                    "cantidad" : 2,
+                    "subTotal" : 200
+                }
+            ],
+            "vendedor" : {
+                "cuil" : "20-20000004-2",
+                "nombre" : "Manuel",
+                "apellido" : "Sanchez",
+                "dni" : 20000004,
+                "domicilio" : {
+                    "calle" : "Calle 2",
+                    "numero" : 3412,
+                    "localidad" : "Jos� Marmol",
+                    "provincia" : "Buenos Aires"
+                },
+                "obraSocial" : {
+                    "nombre" : "PAMI",
+                    "nroAfiliado" : 1254
                 }
             },
-            "cliente": {
-                "nombre": "",
-                "apellido": "",
-                "dni": 0,
-                "domicilio": {
-                    "calle": "",
-                    "numero": "",
-                    "localidad": "",
-                    "provincia": ""
+            "cobrador" : {
+                "cuil" : "20-20000005-2",
+                "nombre" : "Manuel",
+                "apellido" : "Sanchez",
+                "dni" : 20000005,
+                "domicilio" : {
+                    "calle" : "Calle 2",
+                    "numero" : 3412,
+                    "localidad" : "Jos� Marmol",
+                    "provincia" : "Buenos Aires"
                 },
-                "obra_social": {
-                    "nombre": "",
-                    "nro_afiliado": 0
+                "obraSocial" : {
+                    "nombre" : "PAMI",
+                    "nroAfiliado" : 1254
                 }
-            }
+            },
+            "cliente" : {
+                "nombre" : "Damian",
+                "apellido" : "Orzi",
+                "dni" : 10000001,
+                "domicilio" : {
+                    "calle" : "Calle 1",
+                    "numero" : 1232,
+                    "localidad" : "Lan�s",
+                    "provincia" : "Buenos Aires"
+                }
+            },
+            "precioTotal" : 0
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1da3"),
+            "fecha" : {
+                "year" : 2020,
+                "month" : 6,
+                "day" : 22
+            },
+            "nroTicket" : "0002-00000002",
+            "formaPago" : "DEBITO",
+            "detalleVentas" : [
+                {
+                    "producto" : {
+                        "codigo" : 3,
+                        "tipoProducto" : "perfumeria",
+                        "descripcion" : "perfume",
+                        "laboratorio" : "Antonio Banderas",
+                        "precio" : 50
+                    },
+                    "cantidad" : 3,
+                    "subTotal" : 150
+                },
+                {
+                    "producto" : {
+                        "codigo" : 5,
+                        "tipoProducto" : "medicamento",
+                        "descripcion" : "Actron",
+                        "laboratorio" : "Bayer",
+                        "precio" : 100
+                    },
+                    "cantidad" : 2,
+                    "subTotal" : 200
+                }
+            ],
+            "vendedor" : {
+                "cuil" : "20-20000006-2",
+                "nombre" : "Manuel",
+                "apellido" : "Sanchez",
+                "dni" : 20000006,
+                "domicilio" : {
+                    "calle" : "Calle 2",
+                    "numero" : 3412,
+                    "localidad" : "Jos� Marmol",
+                    "provincia" : "Buenos Aires"
+                },
+                "obraSocial" : {
+                    "nombre" : "PAMI",
+                    "nroAfiliado" : 1254
+                }
+            },
+            "cobrador" : {
+                "cuil" : "20-20000007-2",
+                "nombre" : "Manuel",
+                "apellido" : "Sanchez",
+                "dni" : 20000007,
+                "domicilio" : {
+                    "calle" : "Calle 2",
+                    "numero" : 3412,
+                    "localidad" : "Jos� Marmol",
+                    "provincia" : "Buenos Aires"
+                },
+                "obraSocial" : {
+                    "nombre" : "PAMI",
+                    "nroAfiliado" : 1254
+                }
+            },
+            "cliente" : {
+                "nombre" : "Damian",
+                "apellido" : "Orzi",
+                "dni" : 10000004,
+                "domicilio" : {
+                    "calle" : "Calle 4",
+                    "numero" : 43,
+                    "localidad" : "Varela",
+                    "provincia" : "Buenos Aires"
+                }
+            },
+            "precioTotal" : 0
+        },
+        {
+            "_id" : ObjectId("5ef02984889ca02622fc1da4"),
+            "fecha" : {
+                "year" : 2020,
+                "month" : 6,
+                "day" : 22
+            },
+            "nroTicket" : "0003-00000003",
+            "formaPago" : "DEBITO",
+            "detalleVentas" : [
+                {
+                    "producto" : {
+                        "codigo" : 3,
+                        "tipoProducto" : "perfumeria",
+                        "descripcion" : "perfume",
+                        "laboratorio" : "Antonio Banderas",
+                        "precio" : 50
+                    },
+                    "cantidad" : 3,
+                    "subTotal" : 150
+                },
+                {
+                    "producto" : {
+                        "codigo" : 5,
+                        "tipoProducto" : "medicamento",
+                        "descripcion" : "Actron",
+                        "laboratorio" : "Bayer",
+                        "precio" : 100
+                    },
+                    "cantidad" : 2,
+                    "subTotal" : 200
+                }
+            ],
+            "vendedor" : {
+                "cuil" : "20-20000008-2",
+                "nombre" : "Manuel",
+                "apellido" : "Sanchez",
+                "dni" : 20000008,
+                "domicilio" : {
+                    "calle" : "Calle 2",
+                    "numero" : 3412,
+                    "localidad" : "Jos� Marmol",
+                    "provincia" : "Buenos Aires"
+                },
+                "obraSocial" : {
+                    "nombre" : "PAMI",
+                    "nroAfiliado" : 1254
+                }
+            },
+            "cobrador" : {
+                "cuil" : "20-20000009-2",
+                "nombre" : "Manuel",
+                "apellido" : "Sanchez",
+                "dni" : 20000009,
+                "domicilio" : {
+                    "calle" : "Calle 2",
+                    "numero" : 3412,
+                    "localidad" : "Jos� Marmol",
+                    "provincia" : "Buenos Aires"
+                },
+                "obraSocial" : {
+                    "nombre" : "PAMI",
+                    "nroAfiliado" : 1254
+                }
+            },
+            "cliente" : {
+                "nombre" : "Damian",
+                "apellido" : "Orzi",
+                "dni" : 10000005,
+                "domicilio" : {
+                    "calle" : "Calle 5",
+                    "numero" : 2312,
+                    "localidad" : "Temperley",
+                    "provincia" : "Buenos Aires"
+                }
+            },
+            "precioTotal" : 0
         }
     ]
 }
