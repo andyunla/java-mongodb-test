@@ -1,6 +1,8 @@
 package com.unla.negocio;
 
 import com.unla.funciones.Funciones;
+
+import java.time.LocalDate;
 import java.util.List;
 import com.unla.datos.Venta;
 import com.unla.dao.VentaDao;
@@ -32,6 +34,10 @@ public class VentaABM
     
     public List<Venta> traer() {
         return (List<Venta>)VentaABM.dao.traer();
+    }
+    
+    public List<Venta> traerEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+        return (List<Venta>)VentaABM.dao.traerEntreFechas(fechaDesde, fechaHasta);
     }
     
     public void agregar(final Venta objeto) throws Exception {

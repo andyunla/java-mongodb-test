@@ -1,4 +1,5 @@
 package com.unla.dao;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import org.bson.BSONObject;
@@ -64,6 +65,23 @@ public class VentaDao {
             cursor.close();
         }
 		return lista;
+	}
+	
+	public List<Venta> traerEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+		List<Venta> ventas = new ArrayList<Venta>();
+		String json = "{fecha: { $gte:"+ new Gson().toJson(fechaDesde) + ", $lte:" + new Gson().toJson(fechaHasta) + "}}";
+		BSONObject bson = (BSONObject)com.mongodb.util.JSON.parse(json);
+		FindIterable<Document> traidos = collection.find((Bson) bson);
+		if(traidos==null) {
+			System.out.println("No hay ningun venta con las ventas indicadas");
+		} else {
+			MongoCursor<Document> cursor = traidos.iterator();
+			while(cursor.hasNext()) {
+				ventas.add(deserealizar(cursor.next().toJson()));
+			}
+			cursor.close();
+		}
+		return ventas;
 	}
 	
 	public void agregar(Venta objeto) {

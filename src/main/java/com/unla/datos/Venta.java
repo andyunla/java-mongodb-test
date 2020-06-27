@@ -91,4 +91,11 @@ public class Venta {
 	public void setPrecioTotal(double precioTotal) {
 		this.precioTotal = precioTotal;
 	}
+
+	@Override
+	public String toString() {
+		return "Venta [fecha=" + fecha + ", nroTicket=" + nroTicket + ", formaPago=" + formaPago + ", detalleVentas="
+				+ detalleVentas + ", vendedor=" + vendedor + ", cobrador=" + cobrador + ", cliente=" + cliente
+				+ ", precioTotal=" + precioTotal + "]";
+	}
 }
