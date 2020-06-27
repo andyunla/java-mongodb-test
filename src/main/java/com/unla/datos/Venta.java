@@ -11,7 +11,7 @@ public class Venta {
 	private Empleado vendedor;
 	private Empleado cobrador;
 	private Cliente cliente;
-	private double precioTotal;
+	private double precioTotal = 0;
 	
 	public Venta(LocalDate fecha, String nroTicket, String formaPago, List<DetalleVenta> detalleVentas, Empleado vendedor,
 			Empleado cobrador, Cliente cliente) {
@@ -23,6 +23,9 @@ public class Venta {
 		this.vendedor = vendedor;
 		this.cobrador = cobrador;
 		this.cliente = cliente;
+		for(DetalleVenta detalle : detalleVentas) {
+			precioTotal += detalle.getSubTotal();
+		}
 	}
 
 	public LocalDate getFecha() {

@@ -7,11 +7,11 @@ public class DetalleVenta {
 	public DetalleVenta() {
 		super();
 	}
-	public DetalleVenta(Producto producto, int cantidad, double subTotal) {
+	public DetalleVenta(Producto producto, int cantidad) {
 		super();
 		this.producto = producto;
 		this.cantidad = cantidad;
-		this.subTotal = subTotal;
+		this.subTotal = producto.getPrecio() * cantidad;
 	}
 	public Producto getProducto() {
 		return producto;
@@ -30,5 +30,10 @@ public class DetalleVenta {
 	}
 	public void setSubTotal(double subTotal) {
 		this.subTotal = subTotal;
+	}
+	
+	@Override
+	public String toString() {
+		return "DetalleVenta [producto=" + producto + ", cantidad=" + cantidad + ", subTotal=" + subTotal + "]";
 	}
 }
