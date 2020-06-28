@@ -4,6 +4,9 @@ import com.unla.funciones.Funciones;
 
 import java.time.LocalDate;
 import java.util.List;
+
+import org.bson.Document;
+
 import com.unla.datos.Venta;
 import com.unla.dao.VentaDao;
 
@@ -38,6 +41,14 @@ public class VentaABM
     
     public List<Venta> traerEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
         return (List<Venta>)VentaABM.dao.traerEntreFechas(fechaDesde, fechaHasta);
+    }
+
+    public List<Venta> ventasCadaSucursalPorFecha(LocalDate fechaDesde, LocalDate fechaHasta) {
+        return (List<Venta>)VentaABM.dao.ventasCadaSucursalPorFecha(fechaDesde, fechaHasta);
+    }
+
+    public List<Document> totalCadaVentaEntreFecha(LocalDate fechaDesde, LocalDate fechaHasta) {
+        return (List<Document>)VentaABM.dao.totalCadaVentaEntreFecha(fechaDesde, fechaHasta);
     }
     
     public void agregar(final Venta objeto) throws Exception {

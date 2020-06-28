@@ -102,7 +102,7 @@ public class TestCargaDatos {
 			System.out.println("Error: " + e.getMessage());
 		}
 		
-		// Creamos una lista de empleado
+		// Ventas para la sucursal 1
 		List<DetalleVenta> ventas1 = new ArrayList<DetalleVenta>();
 		List<DetalleVenta> ventas2 = new ArrayList<DetalleVenta>();
 		List<DetalleVenta> ventas3 = new ArrayList<DetalleVenta>();
@@ -122,7 +122,7 @@ public class TestCargaDatos {
 		ventas5.add(new DetalleVenta(productoABM.traer(9), 7));
 		ventas5.add(new DetalleVenta(productoABM.traer(1), 4));
 		ventas5.add(new DetalleVenta(productoABM.traer(5), 3));
-		// Sucursal 2
+		// Ventas para la sucursal 2
 		List<DetalleVenta> ventas6 = new ArrayList<DetalleVenta>();
 		List<DetalleVenta> ventas7 = new ArrayList<DetalleVenta>();
 		List<DetalleVenta> ventas8 = new ArrayList<DetalleVenta>();
@@ -134,7 +134,7 @@ public class TestCargaDatos {
 		ventas7.add(new DetalleVenta(productoABM.traer(4), 3));
 		ventas7.add(new DetalleVenta(productoABM.traer(2), 3));
 		ventas8.add(new DetalleVenta(productoABM.traer(3), 5));
-		// Sucursal 3
+		// Ventas para la sucursal 3
 		List<DetalleVenta> ventas9 = new ArrayList<DetalleVenta>();
 		List<DetalleVenta> ventas10 = new ArrayList<DetalleVenta>();
 		List<DetalleVenta> ventas11 = new ArrayList<DetalleVenta>();

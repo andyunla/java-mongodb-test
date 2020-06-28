@@ -1,9 +1,13 @@
 package com.unla.dao;
 
 import org.bson.BSONObject;
+import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
+import com.mongodb.client.AggregateIterable;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
 
 public class MongoUtil {
@@ -30,5 +34,11 @@ public class MongoUtil {
 	
 	public static BSONObject jsonToBSONObject(String json) {
 		return (BSONObject)com.mongodb.util.JSON.parse(json);
+	}
+	
+	public static String executeQuery(String nombreColeccion, String query) {
+		// DEBUG
+		AggregateIterable<Document> traidos = database.getCollection(nombreColeccion).aggregate(null);
+		return null;
 	}
 }

@@ -1,6 +1,7 @@
 package com.unla.test;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bson.BSONObject;
@@ -28,10 +29,9 @@ public class Consultas {
 		System.out.println("1.Detalle y totales de ventas para la cadena completa y por sucursal, entre fechas. ");
 		System.out.println("************************************************************************************\n");
 		LocalDate fechaDesde = LocalDate.of(2020, 1, 1);
-		LocalDate fechaHasta = LocalDate.of(2020, 6, 1);
+		LocalDate fechaHasta = LocalDate.of(2020, 6, 30);
 		List<Venta> ventasEntreFechas = ventaABM.traerEntreFechas(fechaDesde, fechaHasta);
 		String jsonVentas = new Gson().toJson(ventasEntreFechas);
-		System.out.println("\n\n\nLISTA precioTotales: " + JsonPath.read(jsonVentas, "$..[*].precioTotal"));
 		String jsonDetallesVentas = "";
 		int totales = 0;
 		for(Venta venta: ventasEntreFechas) {
@@ -39,51 +39,14 @@ public class Consultas {
 			List<DetalleVenta> detalles = venta.getDetalleVentas();
 			jsonDetallesVentas += new Gson().toJson(detalles) + ",";
 			System.out.println("Venta nro: " + venta.getNroTicket() + "\nDetalles de la venta: " + new Gson().toJson(detalles));
-		
 		}
-		
-		System.out.println("\n\n\nTOTALES: " + totales + "\nDESDE FUNCION");
-		System.out.println("VENTAS ENTRE FECHAS -->:\t" + ventaABM.traerEntreFechas(fechaDesde, fechaHasta));
-		
-		/*
-		// CONSULTAS POR FECHA Y PARA QUE RETORNE TOTALES POR CADA SUCURSAL
-		db.collection.find({"fecha":{ $gte:{"year": 2020, "month": 1, "day": 27}, $lte:{"year":2020, "month": 6, "day":1}}}).count();
-		db.getCollection("ventas").aggregate([
-			{ $match: {
-				"fecha":{ $gte:{"year": 2020, "month": 1, "day": 27}, $lte:{"year":2020, "month": 6, "day":1}}}
-			},
-			{ $unwind: "$detalleVentas" },
-			{ $group : {
-				_id : "$nroTicket",
-				"Total Venta(suma de todos los detalleVentas)" : {$sum : "$detalleVentas.subTotal"}
-			}},
-			{ $sort : { _id : 1 } }
-		])
-
-		*/
-		/*
-		// Para agregar una coma al final de cada array
-		StringBuilder build = new StringBuilder(jsonDetallesVentas);
-		build.deleteCharAt(jsonDetallesVentas.length() - 1);
-		String newDetalle = new String(build);
-		
-		//System.out.println("DETALLES JSOn" + jsonDetallesVentas);
-		//System.out.println(totales);
-		
-
-		
-		String json = "{nroTicket: '" +  + "'}";
-		BSONObject bson = (BSONObject)com.mongodb.util.JSON.parse(json);
-		FindIterable<Document> traidos = collection.find((Bson) bson);
-		if(traidos==null) {
-			System.out.println("No hay ningun empleado con ese cuil");
-		} else {
-			MongoCursor<Document> cursor = traidos.iterator();
-			if(cursor.hasNext())
-				empleado = deserealizar(cursor.next().toJson());
-			cursor.close();
-		}
-		*/
+		// Lista de cada venta con sus totales
+		// Ej -> [{_id: "0001-00000001", total: 4000}, ...]
+		List<Document> totalesVentas = ventaABM.totalCadaVentaEntreFecha(fechaDesde, fechaHasta);
+		// Metemos los valores de 'total' de cada venta en una lista
+		List<Double> totalCadaVenta = JsonPath.read(new Gson().toJson(totalesVentas), "$..[*].total");
+		double total = totalCadaVenta.stream().mapToDouble(f -> f.doubleValue()).sum();
+		System.out.println("\nEl total de la cadena completa es: " + total);
 	}
 }
 

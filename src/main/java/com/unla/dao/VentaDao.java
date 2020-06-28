@@ -1,16 +1,23 @@
 package com.unla.dao;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
 import org.bson.BSONObject;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import com.google.gson.Gson;
+import com.jayway.jsonpath.Filter;
 import com.mongodb.BasicDBObject;
+import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Accumulators;
+import com.mongodb.client.model.Aggregates;
+import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.DeleteResult;
 import com.unla.datos.Venta;
 
@@ -43,7 +50,7 @@ public class VentaDao {
 		BSONObject bson = (BSONObject)com.mongodb.util.JSON.parse(json);
 		FindIterable<Document> traidos = collection.find((Bson) bson);
 		if(traidos==null) {
-			System.out.println("No hay ningun venta con este nroTicket");
+			System.out.println("No hay ninguna venta con este nroTicket");
 		} else {
 			MongoCursor<Document> cursor = traidos.iterator();
 			if(cursor.hasNext())
@@ -65,6 +72,75 @@ public class VentaDao {
             cursor.close();
         }
 		return lista;
+	}
+	
+	public List<Venta> ventasCadaSucursalPorFecha(LocalDate fechaDesde, LocalDate fechaHasta) {
+		Document query = new Document();
+        query.append("$and", Arrays.asList(
+                new Document()
+                        .append("fecha", new Document()
+							.append("$gt", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaDesde)))
+                        ),
+                new Document()
+					.append("fecha", new Document()
+						.append("$lt", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaHasta)))
+					)
+            )
+        );
+        List<Venta> ventas = new ArrayList<Venta>();
+        FindIterable<Document> traidos = collection.find(query);
+        if(traidos==null) {
+			System.out.println("No hay ninguna venta entre las fechas indicadas");
+		} else {
+			MongoCursor<Document> cursor = traidos.iterator();
+			while(cursor.hasNext()) {
+				ventas.add(deserealizar(cursor.next().toJson()));
+			}
+			cursor.close();
+		}
+        return ventas;
+	}
+	
+	/*
+	 * Representa el total de cada venta(la suma de los subtotales de cada detalleVenta)
+	 * Retornará una colección de objetos como el ejemplo sig:
+	 * [{_id: '0001-0000001', total: 1000}, ...]
+	 */
+	public List<Document> totalCadaVentaEntreFecha(LocalDate fechaDesde, LocalDate fechaHasta) {
+		List<? extends Bson> pipeline = Arrays.asList(
+										new Document()
+											.append("$match", new Document()
+												.append("fecha", new Document()
+													.append("$gte", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaDesde)))
+													.append("$lte", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaHasta)))
+												)
+											), 
+										new Document()
+											.append("$unwind", "$detalleVentas"), 
+										new Document()
+											.append("$group", new Document()
+												.append("_id", "$nroTicket")
+												.append("total", new Document()
+														.append("$sum", "$detalleVentas.subTotal")
+												)
+											),
+										new Document()
+											.append("$sort", new Document()
+												.append("_id", 1.0)
+											)
+										);
+		List<Document> totalesVentas = new ArrayList<Document>();
+        AggregateIterable<Document> traidos = collection.aggregate(pipeline);
+		if(traidos==null) {
+			System.out.println("No hay ninguna venta entre las fechas indicadas");
+		} else {
+			MongoCursor<Document> cursor = traidos.iterator();
+			while(cursor.hasNext()) {
+				totalesVentas.add(cursor.next());
+			}
+			cursor.close();
+		}
+		return totalesVentas;
 	}
 	
 	public List<Venta> traerEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
