@@ -13,6 +13,7 @@ import com.unla.datos.Empleado;
 import com.unla.datos.Venta;
 import com.unla.negocio.*;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 //import org.json.JSONException;
 //import org.json.JSONObject;
@@ -24,6 +25,7 @@ import com.mongodb.client.MongoCursor;
 public class Consultas {
 	private static VentaABM ventaABM;
 	public static void main(String ... args) {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Para que el JSON esté formateado
 		ventaABM = VentaABM.getInstance();
 		System.out.println("************************************************************************************");
 		System.out.println("1.Detalle y totales de ventas para la cadena completa y por sucursal, entre fechas. ");
@@ -61,8 +63,8 @@ public class Consultas {
 			Integer nroSucursal = Integer.parseInt(vs.getString("nroSucursal"));
 			System.out.println("\n\nVentas de la sucursal N°" + nroSucursal);
 			System.out.println("***************************");
-			System.out.println("Ventas de la sucursal:\n" + detallesVentas);
-			System.out.println("\nEl total de la sucursal actual es: " + totalSucursal);
+			System.out.println("Ventas de la sucursal:\n" + gson.toJson(detallesVentas));
+			System.out.println("El total de la sucursal actual es: " + totalSucursal);
 		}
 		System.out.println("\n\nEl total de la cadena completa es: $" + totalDetallesVentas.get("totalTodo"));
 		
