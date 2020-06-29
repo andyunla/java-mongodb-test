@@ -45,7 +45,7 @@ public class Consultas {
 			Integer nroSucursal = Integer.parseInt(vs.getString("nroSucursal"));
 			logger.info("Ventas de la sucursal N°" + nroSucursal);
 			logger.info("***************************");
-			logger.info("Ventas de la sucursal:\n" + gson.toJson(detallesVentas));
+			logger.info("Detalles de las ventas:\n" + gson.toJson(detallesVentas));
 			logger.info("El total de la sucursal actual es: " + totalSucursal + "\n\n");
 		}
 		logger.info("El total de la cadena completa es: $" + totalDetallesVentas.get("totalTodo") + "\n\n");
