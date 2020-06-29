@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.bson.BSONObject;
+import org.bson.BsonNull;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import com.google.gson.Gson;
@@ -144,9 +145,11 @@ public class VentaDao {
 	}
 
 	/*
-	 * Obtenemos una colecciÃ³n de las ventas de cada local entre fechas
+	 * Obtenemos una colección de las ventas de cada local junto con sus totales
+	 * dado 2 fechas. También se obtiene la suma de los totales de cada local
+	 * para obtener el 'totalTodo' que es el total de la cadena completa
 	 */
-	public List<Document> detalleYTotalVentasSucursalesEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+	public Document detalleYTotalVentasSucursalesEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
 		List<? extends Bson> pipeline = Arrays.asList(
 										new Document()
 											.append("$match", new Document()
@@ -156,48 +159,65 @@ public class VentaDao {
 												)
 											), 
 										new Document()
-											.append("$unwind", "$detalleVentas"), 
-										new Document()
-											.append("$group", new Document()
-												.append("_id", new Document()
-													.append("$substr", Arrays.asList(
-														"$nroTicket",
-														0.0,
-														new Document()
-															.append("$indexOfBytes", Arrays.asList(
-																	"$nroTicket",
-																	"-")
-														)
-													)
-													)
-												)
-												.append("productos", new Document()
-													.append("$push", "$detalleVentas")
-												)
-												.append("total", new Document()
-													.append("$sum", "$detalleVentas.subTotal")
-												)
-											), 
-										new Document()
-												.append("$sort", new Document()
-													.append("_id", 1.0)
-												), 
-										new Document()
-												.append("$project", new Document()
-													.append("_id", 0.0)
-													.append("productos", 1.0)
-													.append("nroSucursal", "$_id")
-													.append("total", 1.0)
-												)
+			                            	.append("$unwind", "$detalleVentas"), 
+			                            new Document()
+				                            .append("$group", new Document()
+			                                    .append("_id", new Document()
+		                                            .append("$substr", Arrays.asList(
+		                                                    "$nroTicket",
+		                                                    0.0,
+		                                                    new Document()
+	                                                            .append("$indexOfBytes", Arrays.asList(
+	                                                                    "$nroTicket",
+	                                                                    "-"
+	                                                                )
+	                                                            )
+		                                            		)
+			                                            )
+				                                    )
+			                                    .append("detalles", new Document()
+		                                            .append("$push", "$detalleVentas")
+			                                    )
+			                                    .append("totalSucursal", new Document()
+		                                            .append("$sum", "$detalleVentas.subTotal")
+			                                    )
+				                            ), 
+					                    new Document()
+				                            .append("$project", new Document()
+			                                    .append("_id", 0.0)
+			                                    .append("nroSucursal", "$_id")
+			                                    .append("detalles", 1.0)
+			                                    .append("totalSucursal", 1.0)
+				                            ), 
+				                        new Document()
+				                            .append("$sort", new Document()
+				                                    .append("nroSucursal", 1.0)
+				                            ), 
+					                    new Document()
+				                            .append("$group", new Document()
+			                                    .append("_id", new BsonNull())
+			                                    .append("ventasSucursales", new Document()
+			                                            .append("$push", "$$ROOT")
+			                                    )
+			                                    .append("totalTodo", new Document()
+			                                            .append("$sum", "$totalSucursal")
+			                                    )
+				                            ), 
+					                    new Document()
+				                            .append("$project", new Document()
+				                                    .append("_id", 0.0)
+				                                    .append("ventasSucursales", 1.0)
+				                                    .append("totalTodo", 1.0)
+				                            )
 										);
-		List<Document> totalesVentas = new ArrayList<Document>();
+		Document totalesVentas = null;
         AggregateIterable<Document> traidos = collection.aggregate(pipeline);
 		if(traidos==null) {
 			System.out.println("No hay ninguna venta entre las fechas indicadas");
 		} else {
 			MongoCursor<Document> cursor = traidos.iterator();
-			while(cursor.hasNext()) {
-				totalesVentas.add(cursor.next());
+			if(cursor.hasNext()) {
+				totalesVentas = cursor.next();
 			}
 			cursor.close();
 		}

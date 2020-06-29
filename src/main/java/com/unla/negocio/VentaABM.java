@@ -51,8 +51,8 @@ public class VentaABM
         return (List<Document>)VentaABM.dao.totalCadaVentaEntreFecha(fechaDesde, fechaHasta);
     }
 
-    public List<Document> detalleYTotalVentasSucursalesEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
-        return (List<Document>)VentaABM.dao.detalleYTotalVentasSucursalesEntreFechas(fechaDesde, fechaHasta);
+    public Document detalleYTotalVentasSucursalesEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+        return (Document)VentaABM.dao.detalleYTotalVentasSucursalesEntreFechas(fechaDesde, fechaHasta);
     }
     
     public void agregar(final Venta objeto) throws Exception {

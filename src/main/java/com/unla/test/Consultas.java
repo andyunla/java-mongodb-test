@@ -25,11 +25,12 @@ public class Consultas {
 	private static VentaABM ventaABM;
 	public static void main(String ... args) {
 		ventaABM = VentaABM.getInstance();
-		
+		System.out.println("************************************************************************************");
 		System.out.println("1.Detalle y totales de ventas para la cadena completa y por sucursal, entre fechas. ");
 		System.out.println("************************************************************************************\n");
 		LocalDate fechaDesde = LocalDate.of(2020, 1, 1);
 		LocalDate fechaHasta = LocalDate.of(2020, 6, 30);
+		/* VERSION VIEJA
 		List<Venta> ventasEntreFechas = ventaABM.traerEntreFechas(fechaDesde, fechaHasta);
 		String jsonVentas = new Gson().toJson(ventasEntreFechas);
 		String jsonDetallesVentas = "";
@@ -49,9 +50,25 @@ public class Consultas {
 		List<Double> totalCadaVenta = JsonPath.read(new Gson().toJson(totalesVentas), "$..[*].total");
 		double totalTodaVentas = totalCadaVenta.stream().mapToDouble(f -> f.doubleValue()).sum();
 		System.out.println("\nEl total de la cadena completa es: " + totalTodaVentas);
-
-		List<Document> totalesVentasPorSucursal = ventaABM.detalleYTotalVentasSucursalesEntreFechas(fechaDesde, fechaHasta);
-		System.out.println("\n\nVentas por locales\n" + new Gson().toJson(totalesVentasPorSucursal));
+		*/
+		// Recibiremos un objeto del tipo: {'ventasSucursales': [...], 'totalTodo': 34234}
+		Document totalDetallesVentas = ventaABM.detalleYTotalVentasSucursalesEntreFechas(fechaDesde, fechaHasta);
+		List<Document> ventasSucursales = (List<Document>)totalDetallesVentas.get("ventasSucursales"); // Obtenemos el array de las ventas de cada sucursal
+		System.out.println("Ventas entre las fechas " + fechaDesde + " y " + fechaHasta);
+		for(Document vs: ventasSucursales) {
+			List<Document> detallesVentas = (List<Document>)vs.get("detalles");
+			Double totalSucursal = vs.getDouble("totalSucursal");
+			Integer nroSucursal = Integer.parseInt(vs.getString("nroSucursal"));
+			System.out.println("\n\nVentas de la sucursal N°" + nroSucursal);
+			System.out.println("***************************");
+			System.out.println("Ventas de la sucursal:\n" + detallesVentas);
+			System.out.println("\nEl total de la sucursal actual es: " + totalSucursal);
+		}
+		System.out.println("\n\nEl total de la cadena completa es: $" + totalDetallesVentas.get("totalTodo"));
+		
+		System.out.println("\n\n\n\n***************************************************************************************************************");
+		System.out.println("2.Detalle y totales de ventas para la cadena completa y por sucursal, por obra social o privados entre fechas. ");
+		System.out.println("***************************************************************************************************************\n");
 	}
 }
 

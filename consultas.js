@@ -41,3 +41,85 @@ db.getCollection("ventas").aggregate([
         }
     }
 ])
+
+// La 1ra completa
+db.getCollection("ventas").aggregate(
+    [
+        { 
+            "$match" : { 
+                "fecha" : { 
+                    "$gte" : { 
+                        "year" : 2020.0, 
+                        "month" : 1.0, 
+                        "day" : 1.0
+                    }, 
+                    "$lte" : { 
+                        "year" : 2020.0, 
+                        "month" : 6.0, 
+                        "day" : 30.0
+                    }
+                }
+            }
+        }, 
+        { 
+            "$unwind" : "$detalleVentas"
+        }, 
+        { 
+            "$group" : { 
+                "_id" : { 
+                    "$substr" : [
+                        "$nroTicket", 
+                        0.0, 
+                        { 
+                            "$indexOfBytes" : [
+                                "$nroTicket", 
+                                "-"
+                            ]
+                        }
+                    ]
+                }, 
+                "detalles" : { 
+                    "$push" : "$detalleVentas"
+                }, 
+                "totalSucursal" : { 
+                    "$sum" : "$detalleVentas.subTotal"
+                }
+            }
+        }, 
+        { 
+            "$project" : { 
+                "_id" : 0.0, 
+                "nroSucursal" : "$_id", 
+                "detalles" : 1.0, 
+                "totalSucursal" : 1.0
+            }
+        }, 
+        { 
+            "$sort" : { 
+                "nroSucursal" : 1.0
+            }
+        }, 
+        { 
+            "$group" : { 
+                "_id" : null, 
+                "ventasSucursales" : { 
+                    "$push" : "$$ROOT"
+                }, 
+                "totalTodo" : { 
+                    "$sum" : "$total"
+                }
+            }
+        }, 
+        { 
+            "$project" : { 
+                "_id" : 0.0, 
+                "ventasSucursales" : 1.0, 
+                "totalTodo" : 1.0
+            }
+        }
+    ], 
+    { 
+        "allowDiskUse" : false
+    }
+);
+
