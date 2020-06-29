@@ -142,7 +142,68 @@ public class VentaDao {
 		}
 		return totalesVentas;
 	}
-	
+
+	/*
+	 * Obtenemos una colección de las ventas de cada local entre fechas
+	 */
+	public List<Document> detalleYTotalVentasSucursalesEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+		List<? extends Bson> pipeline = Arrays.asList(
+										new Document()
+											.append("$match", new Document()
+												.append("fecha", new Document()
+													.append("$gte", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaDesde)))
+													.append("$lte", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaHasta)))
+												)
+											), 
+										new Document()
+											.append("$unwind", "$detalleVentas"), 
+										new Document()
+											.append("$group", new Document()
+												.append("_id", new Document()
+													.append("$substr", Arrays.asList(
+														"$nroTicket",
+														0.0,
+														new Document()
+															.append("$indexOfBytes", Arrays.asList(
+																	"$nroTicket",
+																	"-")
+														)
+													)
+													)
+												)
+												.append("productos", new Document()
+													.append("$push", "$detalleVentas")
+												)
+												.append("total", new Document()
+													.append("$sum", "$detalleVentas.subTotal")
+												)
+											), 
+										new Document()
+												.append("$sort", new Document()
+													.append("_id", 1.0)
+												), 
+										new Document()
+												.append("$project", new Document()
+													.append("_id", 0.0)
+													.append("productos", 1.0)
+													.append("nroSucursal", "$_id")
+													.append("total", 1.0)
+												)
+										);
+		List<Document> totalesVentas = new ArrayList<Document>();
+        AggregateIterable<Document> traidos = collection.aggregate(pipeline);
+		if(traidos==null) {
+			System.out.println("No hay ninguna venta entre las fechas indicadas");
+		} else {
+			MongoCursor<Document> cursor = traidos.iterator();
+			while(cursor.hasNext()) {
+				totalesVentas.add(cursor.next());
+			}
+			cursor.close();
+		}
+		return totalesVentas;
+	}
+
 	public List<Venta> traerEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
 		List<Venta> ventas = new ArrayList<Venta>();
 		String json = "{fecha: { $gte:"+ new Gson().toJson(fechaDesde) + ", $lte:" + new Gson().toJson(fechaHasta) + "}}";

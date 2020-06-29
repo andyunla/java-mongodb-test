@@ -50,6 +50,10 @@ public class VentaABM
     public List<Document> totalCadaVentaEntreFecha(LocalDate fechaDesde, LocalDate fechaHasta) {
         return (List<Document>)VentaABM.dao.totalCadaVentaEntreFecha(fechaDesde, fechaHasta);
     }
+
+    public List<Document> detalleYTotalVentasSucursalesEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+        return (List<Document>)VentaABM.dao.detalleYTotalVentasSucursalesEntreFechas(fechaDesde, fechaHasta);
+    }
     
     public void agregar(final Venta objeto) throws Exception {
         final Venta venta = this.traer(objeto.getNroTicket());
@@ -57,7 +61,7 @@ public class VentaABM
             throw new Exception("Ya existe el ticket con el nroTicket.");
         }
         if (!Funciones.validarNroTicket(objeto.getNroTicket())) {
-            throw new Exception("El nroTicket ingresado no es v�lido.");
+            throw new Exception("El nroTicket ingresado no es válido.");
         }
         VentaABM.dao.agregar(objeto);
     }

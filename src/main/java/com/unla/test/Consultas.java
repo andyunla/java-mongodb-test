@@ -33,20 +33,25 @@ public class Consultas {
 		List<Venta> ventasEntreFechas = ventaABM.traerEntreFechas(fechaDesde, fechaHasta);
 		String jsonVentas = new Gson().toJson(ventasEntreFechas);
 		String jsonDetallesVentas = "";
-		int totales = 0;
+		System.out.println("Detalles de todas las ventas: ");
+		System.out.println("********************************************");
 		for(Venta venta: ventasEntreFechas) {
-			totales += venta.getPrecioTotal();
 			List<DetalleVenta> detalles = venta.getDetalleVentas();
-			jsonDetallesVentas += new Gson().toJson(detalles) + ",";
-			System.out.println("Venta nro: " + venta.getNroTicket() + "\nDetalles de la venta: " + new Gson().toJson(detalles));
+			String[] parts = venta.getNroTicket().split("-");
+			Long nroSucursal = Long.parseLong(parts[0]);
+			Long nroVenta =  Long.parseLong(parts[1]);
+			System.out.println("Venta nro: " + nroVenta + "\nDetalles de la venta(Sucursal "+ nroSucursal + "): " + new Gson().toJson(detalles));
 		}
 		// Lista de cada venta con sus totales
 		// Ej -> [{_id: "0001-00000001", total: 4000}, ...]
 		List<Document> totalesVentas = ventaABM.totalCadaVentaEntreFecha(fechaDesde, fechaHasta);
 		// Metemos los valores de 'total' de cada venta en una lista
 		List<Double> totalCadaVenta = JsonPath.read(new Gson().toJson(totalesVentas), "$..[*].total");
-		double total = totalCadaVenta.stream().mapToDouble(f -> f.doubleValue()).sum();
-		System.out.println("\nEl total de la cadena completa es: " + total);
+		double totalTodaVentas = totalCadaVenta.stream().mapToDouble(f -> f.doubleValue()).sum();
+		System.out.println("\nEl total de la cadena completa es: " + totalTodaVentas);
+
+		List<Document> totalesVentasPorSucursal = ventaABM.detalleYTotalVentasSucursalesEntreFechas(fechaDesde, fechaHasta);
+		System.out.println("\n\nVentas por locales\n" + new Gson().toJson(totalesVentasPorSucursal));
 	}
 }
 
