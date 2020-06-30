@@ -10,6 +10,7 @@ import org.bson.conversions.Bson;
 
 import com.unla.datos.DetalleVenta;
 import com.unla.datos.Empleado;
+import com.unla.datos.Producto;
 import com.unla.datos.Venta;
 import com.unla.funciones.LoggerWrapper;
 import com.unla.negocio.*;
@@ -34,7 +35,7 @@ public class Consultas {
 		logger.info("1.Detalle y totales de ventas para la cadena completa y por sucursal, entre fechas. ");
 		logger.info("************************************************************************************\n");
 		LocalDate fechaDesde = LocalDate.of(2020, 1, 1);
-		LocalDate fechaHasta = LocalDate.of(2020, 6, 30);
+		LocalDate fechaHasta = LocalDate.of(2020, 4, 6);
 		// Recibiremos un objeto del tipo: {'ventasSucursales': [...], 'totalTodo': 34234}
 		Document totalDetallesVentas = ventaABM.detalleYTotalVentasSucursalesEntreFechas(fechaDesde, fechaHasta);
 		List<Document> ventasSucursales = (List<Document>)totalDetallesVentas.get("ventasSucursales"); // Obtenemos el array de las ventas de cada sucursal
@@ -50,9 +51,34 @@ public class Consultas {
 		}
 		logger.info("El total de la cadena completa es: $" + totalDetallesVentas.get("totalTodo") + "\n\n");
 		
-		logger.error("***************************************************************************************************************");
-		logger.error("2.Detalle y totales de ventas para la cadena completa y por sucursal, por obra social o privados entre fechas. ");
-		logger.error("***************************************************************************************************************\n");
+		logger.error("****************************************************************************************************************************************");
+		logger.error("4.Detalle y totales de ventas de productos, total de la cadena y por sucursal, entre fechas, diferenciados entre farmacia y perfumería. ");
+		logger.error("****************************************************************************************************************************************\n");
+		List<Document> detalleVentasProductos = ventaABM.detallesVentaEntreFechaPorTipo(fechaDesde, fechaHasta);
+		for(Document dv: detalleVentasProductos) {
+			List<Double> listaTotalTipo = new ArrayList<Double>();
+			logger.info("TIPO: " + dv.getString("tipoProducto") + "\n\n");
+			List<Document> productos = (List<Document>) dv.get("productos");
+			// Recorriendo lista de productos del tipo seleccionado
+			for(Document p: productos) {
+				List<Double> listaTotalSucursal = new ArrayList<Double>();
+				Document producto = (Document) p.get("producto");
+				logger.info("Codigo de producto: " + producto.get("codigo"));
+				Double precio = producto.getDouble("precio");
+				// Recorriendo lista de locales que vendieron el producto
+				for(Document sv: (List<Document>) p.get("sucursalVendio")) {
+					logger.info("Sucursal N°" + sv.getString("sucursal"));
+					Double totalSucursal = sv.getInteger("cantidad") * precio;
+					logger.info("Total de la venta con ese producto " + totalSucursal);
+					listaTotalSucursal.add(totalSucursal);
+				}
+				Double totalProducto = listaTotalSucursal.stream().mapToDouble(f -> f.doubleValue()).sum();
+				logger.info("Total de la cadena recaudado por el producto: " + totalProducto + "\n");
+				listaTotalTipo.add(totalProducto);
+			}
+			Double totalTipo = listaTotalTipo.stream().mapToDouble(f -> f.doubleValue()).sum();
+			logger.info("Total de la cadena por tipo: " + totalTipo + "\n");
+		}
 	}
 }
 
@@ -84,7 +110,7 @@ for(Venta venta: ventasEntreFechas) {
 // Ej -> [{_id: "0001-00000001", total: 4000}, ...]
 List<Document> totalesVentas = ventaABM.totalCadaVentaEntreFecha(fechaDesde, fechaHasta);
 // Metemos los valores de 'total' de cada venta en una lista
-List<Double> totalCadaVenta = JsonPath.read(new Gson().toJson(totalesVentas), "$..[*].total");
+List<Double> totalCadaVenta = JsonPath.read(new Gson().toJson(totalesVentas), "$sucursal[*].cantidad");
 double totalTodaVentas = totalCadaVenta.stream().mapToDouble(f -> f.doubleValue()).sum();
 System.out.println("\nEl total de la cadena completa es: " + totalTodaVentas);
 */

@@ -55,6 +55,10 @@ public class VentaABM
         return (Document)VentaABM.dao.detalleYTotalVentasSucursalesEntreFechas(fechaDesde, fechaHasta);
     }
     
+    public List<Document> detallesVentaEntreFechaPorTipo(LocalDate fechaDesde, LocalDate fechaHasta) {
+        return (List<Document>)VentaABM.dao.detallesVentaEntreFechaPorTipo(fechaDesde, fechaHasta);
+    }
+    
     public void agregar(final Venta objeto) throws Exception {
         final Venta venta = this.traer(objeto.getNroTicket());
         if (venta != null) {

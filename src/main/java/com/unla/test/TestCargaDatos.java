@@ -150,18 +150,18 @@ public class TestCargaDatos {
 		ventas12.add(new DetalleVenta(productoABM.traer(2), 5));
 		ventas12.add(new DetalleVenta(productoABM.traer(3), 4));
 		try {
-			ventaABM.agregar(new Venta(LocalDate.of(2020, 3, 5), "0001-00000001", "CREDITO", ventas1, empleadoABM.traer("20-20000004-2"), empleadoABM.traer("20-20000005-2"), clienteABM.traer(10000001)));
-			ventaABM.agregar(new Venta(LocalDate.of(2020, 3, 5), "0002-00000002", "DEBITO", ventas2, empleadoABM.traer("20-20000005-2"), empleadoABM.traer("20-20000004-2"), clienteABM.traer(10000004)));
-			ventaABM.agregar(new Venta(LocalDate.of(2020, 3, 6), "0003-00000003", "DEBITO", ventas3, empleadoABM.traer("20-20000005-2"), empleadoABM.traer("20-20000004-2"), clienteABM.traer(10000005)));
-			ventaABM.agregar(new Venta(LocalDate.of(2020, 4, 25), "0003-00000004", "DEBITO", ventas4, empleadoABM.traer("20-20000004-2"), empleadoABM.traer("20-20000005-2"), clienteABM.traer(10000007)));
-			ventaABM.agregar(new Venta(LocalDate.of(2020, 4, 26), "0003-00000005", "CREDITO", ventas5, empleadoABM.traer("20-20000004-2"), empleadoABM.traer("20-20000005-2"), clienteABM.traer(10000004)));
-			ventaABM.agregar(new Venta(LocalDate.of(2020, 5, 15), "0001-00000006", "CREDITO", ventas6, empleadoABM.traer("20-20000006-2"), empleadoABM.traer("20-20000007-2"), clienteABM.traer(10000006)));
-			ventaABM.agregar(new Venta(LocalDate.of(2020, 5, 25), "0001-00000007", "DEBITO", ventas7, empleadoABM.traer("20-20000007-2"), empleadoABM.traer("20-20000006-2"), clienteABM.traer(10000001)));
-			ventaABM.agregar(new Venta(LocalDate.of(2020, 6, 7), "0001-00000008", "DEBITO", ventas8, empleadoABM.traer("20-20000007-2"), empleadoABM.traer("20-20000006-2"), clienteABM.traer(10000007)));
-			ventaABM.agregar(new Venta(LocalDate.of(2020, 6, 24), "0002-00000009", "DEBITO", ventas9, empleadoABM.traer("20-20000008-2"), empleadoABM.traer("20-20000009-2"), clienteABM.traer(10000003)));
-			ventaABM.agregar(new Venta(LocalDate.of(2020, 7, 12), "0002-00000010", "CREDITO", ventas10, empleadoABM.traer("20-20000008-2"), empleadoABM.traer("20-20000009-2"), clienteABM.traer(10000002)));
-			ventaABM.agregar(new Venta(LocalDate.of(2020, 7, 13), "0002-00000011", "CREDITO", ventas11, empleadoABM.traer("20-20000009-2"), empleadoABM.traer("20-20000008-2"), clienteABM.traer(10000009)));
-			ventaABM.agregar(new Venta(LocalDate.of(2020, 8, 5), "0003-00000012", "DEBITO", ventas12, empleadoABM.traer("20-20000008-2"), empleadoABM.traer("20-20000009-2"), clienteABM.traer(10000010)));
+			ventaABM.agregar(new Venta(LocalDate.of(2020, 3, 5), "1000-00000001", "CREDITO", ventas1, empleadoABM.traer("20-20000004-2"), empleadoABM.traer("20-20000005-2"), clienteABM.traer(10000001)));
+			ventaABM.agregar(new Venta(LocalDate.of(2020, 3, 5), "1001-00000002", "DEBITO", ventas2, empleadoABM.traer("20-20000005-2"), empleadoABM.traer("20-20000004-2"), clienteABM.traer(10000004)));
+			ventaABM.agregar(new Venta(LocalDate.of(2020, 3, 6), "1002-00000003", "DEBITO", ventas3, empleadoABM.traer("20-20000005-2"), empleadoABM.traer("20-20000004-2"), clienteABM.traer(10000005)));
+			ventaABM.agregar(new Venta(LocalDate.of(2020, 4, 25), "1002-00000004", "DEBITO", ventas4, empleadoABM.traer("20-20000004-2"), empleadoABM.traer("20-20000005-2"), clienteABM.traer(10000007)));
+			ventaABM.agregar(new Venta(LocalDate.of(2020, 4, 26), "1002-00000005", "CREDITO", ventas5, empleadoABM.traer("20-20000004-2"), empleadoABM.traer("20-20000005-2"), clienteABM.traer(10000004)));
+			ventaABM.agregar(new Venta(LocalDate.of(2020, 5, 15), "1000-00000006", "CREDITO", ventas6, empleadoABM.traer("20-20000006-2"), empleadoABM.traer("20-20000007-2"), clienteABM.traer(10000006)));
+			ventaABM.agregar(new Venta(LocalDate.of(2020, 5, 25), "1000-00000007", "DEBITO", ventas7, empleadoABM.traer("20-20000007-2"), empleadoABM.traer("20-20000006-2"), clienteABM.traer(10000001)));
+			ventaABM.agregar(new Venta(LocalDate.of(2020, 6, 7), "1000-00000008", "DEBITO", ventas8, empleadoABM.traer("20-20000007-2"), empleadoABM.traer("20-20000006-2"), clienteABM.traer(10000007)));
+			ventaABM.agregar(new Venta(LocalDate.of(2020, 6, 24), "1001-00000009", "DEBITO", ventas9, empleadoABM.traer("20-20000008-2"), empleadoABM.traer("20-20000009-2"), clienteABM.traer(10000003)));
+			ventaABM.agregar(new Venta(LocalDate.of(2020, 7, 12), "1001-00000010", "CREDITO", ventas10, empleadoABM.traer("20-20000008-2"), empleadoABM.traer("20-20000009-2"), clienteABM.traer(10000002)));
+			ventaABM.agregar(new Venta(LocalDate.of(2020, 7, 13), "1001-00000011", "CREDITO", ventas11, empleadoABM.traer("20-20000009-2"), empleadoABM.traer("20-20000008-2"), clienteABM.traer(10000009)));
+			ventaABM.agregar(new Venta(LocalDate.of(2020, 8, 5), "1002-00000012", "DEBITO", ventas12, empleadoABM.traer("20-20000008-2"), empleadoABM.traer("20-20000009-2"), clienteABM.traer(10000010)));
 			System.out.println("Ventas cargadas correctamente");
 		} catch(Exception e) {
 			System.out.println("Error: " + e.getMessage());

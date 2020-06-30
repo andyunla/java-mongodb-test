@@ -223,7 +223,99 @@ public class VentaDao {
 		}
 		return totalesVentas;
 	}
-
+	
+	public List<Document> detallesVentaEntreFechaPorTipo(LocalDate fechaDesde, LocalDate fechaHasta) {
+		List<? extends Bson> pipeline = Arrays.asList(
+						                new Document()
+						                        .append("$match", new Document()
+						                                .append("fecha", new Document()
+						                                		.append("$gte", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaDesde)))
+																.append("$lte", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaHasta)))
+						                                )
+						                        ), 
+						                new Document()
+						                        .append("$unwind", "$detalleVentas"), 
+						                new Document()
+						                        .append("$project", new Document()
+						                                .append("_id", 0.0)
+						                                .append("nroSucursal", new Document()
+						                                        .append("$substr", Arrays.asList(
+						                                                "$nroTicket",
+						                                                0.0,
+						                                                new Document()
+						                                                        .append("$indexOfBytes", Arrays.asList(
+						                                                                "$nroTicket",
+						                                                                "-"
+						                                                            )
+						                                                        )
+						                                            )
+						                                        )
+						                                )
+						                                .append("detalleVentas", 1.0)
+						                        ), 
+						                new Document()
+						                        .append("$group", new Document()
+						                                .append("_id", "$nroSucursal")
+						                                .append("nroSucursal", new Document()
+						                                        .append("$first", "$nroSucursal")
+						                                )
+						                                .append("detalleVentas", new Document()
+						                                        .append("$push", "$detalleVentas")
+						                                )
+						                        ), 
+						                new Document()
+						                        .append("$unwind", "$detalleVentas"), 
+						                new Document()
+						                        .append("$group", new Document()
+						                                .append("_id", "$detalleVentas.producto.codigo")
+						                                .append("producto", new Document()
+						                                        .append("$first", "$detalleVentas.producto")
+						                                )
+						                                .append("sucursalVendio", new Document()
+						                                        .append("$push", new Document()
+						                                                .append("sucursal", "$nroSucursal")
+						                                                .append("cantidad", "$detalleVentas.cantidad")
+						                                        )
+						                                )
+						                        ), 
+						                new Document()
+						                        .append("$project", new Document()
+						                                .append("_id", new BsonNull())
+						                                .append("codProducto", "$_id")
+						                                .append("producto", 1.0)
+						                                .append("sucursalVendio", 1.0)
+						                        ), 
+						                new Document()
+						                        .append("$group", new Document()
+						                                .append("_id", "$producto.tipoProducto")
+						                                .append("productos", new Document()
+						                                        .append("$push", new Document()
+						                                                .append("producto", "$producto")
+						                                                .append("sucursalVendio", "$sucursalVendio")
+						                                        )
+						                                )
+						                        ), 
+				                        new Document()
+			                            .append("$project", new Document()
+			                                    .append("_id", 0.0)
+			                                    .append("tipoProducto", "$_id")
+			                                    .append("productos", 1.0)
+			                            )
+						        );
+		List<Document> detalleVentas = new ArrayList<Document>();
+        AggregateIterable<Document> traidos = collection.aggregate(pipeline);
+		if(traidos==null) {
+			System.out.println("No hay ninguna venta entre las fechas indicadas");
+		} else {
+			MongoCursor<Document> cursor = traidos.iterator();
+			while(cursor.hasNext()) {
+				detalleVentas.add(cursor.next());
+			}
+			cursor.close();
+		}
+		return detalleVentas;
+	}
+	
 	public List<Venta> traerEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
 		List<Venta> ventas = new ArrayList<Venta>();
 		String json = "{fecha: { $gte:"+ new Gson().toJson(fechaDesde) + ", $lte:" + new Gson().toJson(fechaHasta) + "}}";

@@ -123,3 +123,102 @@ db.getCollection("ventas").aggregate(
     }
 );
 
+// El 4to
+db.getCollection("ventas").aggregate(
+    [
+        { 
+            "$match" : { 
+                "fecha" : { 
+                    "$gte" : { 
+                        "year" : 2020.0, 
+                        "month" : 1.0, 
+                        "day" : 1.0
+                    }, 
+                    "$lte" : { 
+                        "year" : 2020.0, 
+                        "month" : 4.0, 
+                        "day" : 6.0
+                    }
+                }
+            }
+        }, 
+        { 
+            "$unwind" : "$detalleVentas"
+        }, 
+        { 
+            "$project" : { 
+                "_id" : 0.0, 
+                "nroSucursal" : { 
+                    "$substr" : [
+                        "$nroTicket", 
+                        0.0, 
+                        { 
+                            "$indexOfBytes" : [
+                                "$nroTicket", 
+                                "-"
+                            ]
+                        }
+                    ]
+                }, 
+                "detalleVentas" : 1.0
+            }
+        }, 
+        { 
+            "$group" : { 
+                "_id" : "$nroSucursal", 
+                "nroSucursal" : { 
+                    "$first" : "$nroSucursal"
+                }, 
+                "detalleVentas" : { 
+                    "$push" : "$detalleVentas"
+                }
+            }
+        }, 
+        { 
+            "$unwind" : "$detalleVentas"
+        }, 
+        { 
+            "$group" : { 
+                "_id" : "$detalleVentas.producto.codigo", 
+                "producto" : { 
+                    "$first" : "$detalleVentas.producto"
+                }, 
+                "sucursalVendio" : { 
+                    "$push" : { 
+                        "sucursal" : "$nroSucursal", 
+                        "cantidad" : "$detalleVentas.cantidad"
+                    }
+                }
+            }
+        }, 
+        { 
+            "$project" : { 
+                "_id" : null, 
+                "codProducto" : "$_id", 
+                "producto" : 1.0, 
+                "sucursalVendio" : 1.0
+            }
+        }, 
+        { 
+            "$group" : { 
+                "_id" : "$producto.tipoProducto", 
+                "productos" : { 
+                    "$push" : { 
+                        "producto" : "$producto", 
+                        "sucursalVendio" : "$sucursalVendio"
+                    }
+                }
+            }
+        }, 
+        { 
+            "$project" : { 
+                "_id" : 0.0, 
+                "tipoProducto" : "$_id", 
+                "productos" : 1.0
+            }
+        }
+    ], 
+    { 
+        "allowDiskUse" : false
+    }
+);
