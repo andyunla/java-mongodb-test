@@ -47,11 +47,11 @@ public class LogFormatter extends Formatter
         }
         StringBuilder builder = new StringBuilder();
         builder.append(ansi_color);
-
+        /*
         builder.append("[");
         builder.append(LocalTime.now());
         builder.append("]");
-        /*
+        
         builder.append(" [");
         builder.append("Logger");
         builder.append("]");
