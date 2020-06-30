@@ -27,8 +27,7 @@ import com.mongodb.client.MongoCursor;
 public class Consultas {
 	private static VentaABM ventaABM;
 	public static void main(String ... args) {
-		String className = Consultas.class.getName();
-        LoggerWrapper logger = LoggerWrapper.getInstance(className);
+        LoggerWrapper logger = LoggerWrapper.getInstance("Consultas");
 		Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Para que el JSON esté formateado
 		ventaABM = VentaABM.getInstance();
 		logger.info("************************************************************************************");
