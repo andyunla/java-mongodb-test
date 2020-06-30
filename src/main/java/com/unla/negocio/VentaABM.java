@@ -62,10 +62,10 @@ public class VentaABM
     public void agregar(final Venta objeto) throws Exception {
         final Venta venta = this.traer(objeto.getNroTicket());
         if (venta != null) {
-            throw new Exception("Ya existe el ticket con el nroTicket.");
+            throw new Exception("Ya existe la venta con el nroTicket.");
         }
         if (!Funciones.validarNroTicket(objeto.getNroTicket())) {
-            throw new Exception("El nroTicket ingresado no es v√°lido.");
+            throw new Exception("El nroTicket ingresado no es v·lido.");
         }
         VentaABM.dao.agregar(objeto);
     }
