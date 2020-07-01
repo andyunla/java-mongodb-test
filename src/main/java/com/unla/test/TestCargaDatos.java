@@ -110,10 +110,11 @@ public class TestCargaDatos {
 		List<DetalleVenta> ventas5 = new ArrayList<DetalleVenta>();
 		ventas1.add(new DetalleVenta(productoABM.traer(1), 7));
 		ventas1.add(new DetalleVenta(productoABM.traer(4), 2));
+		ventas1.add(new DetalleVenta(productoABM.traer(5), 6));
 		ventas2.add(new DetalleVenta(productoABM.traer(3), 3));
 		ventas2.add(new DetalleVenta(productoABM.traer(5), 3));
 		ventas3.add(new DetalleVenta(productoABM.traer(3), 4));
-		ventas3.add(new DetalleVenta(productoABM.traer(5), 5));
+		//ventas3.add(new DetalleVenta(productoABM.traer(5), 5));
 		ventas4.add(new DetalleVenta(productoABM.traer(2), 5));
 		ventas4.add(new DetalleVenta(productoABM.traer(4), 3));
 		ventas4.add(new DetalleVenta(productoABM.traer(7), 1));

@@ -123,6 +123,69 @@ db.getCollection("ventas").aggregate(
     }
 );
 
+// 2do
+db.getCollection("ventas").aggregate(
+    [
+        { 
+            "$match" : { 
+                "fecha" : { 
+                    "$gte" : { 
+                        "year" : 2020.0, 
+                        "month" : 1.0, 
+                        "day" : 1.0
+                    }, 
+                    "$lte" : { 
+                        "year" : 2020.0, 
+                        "month" : 9.0, 
+                        "day" : 6.0
+                    }
+                }
+            }
+        }, 
+        { 
+            "$match" : { 
+                "cliente.obraSocial" : { 
+                    "$exists" : true
+                }
+            }
+        }, 
+        { 
+            "$group" : { 
+                "_id" : { 
+                    "nroSucursal" : { 
+                        "$substr" : [
+                            "$nroTicket", 
+                            0.0, 
+                            { 
+                                "$indexOfBytes" : [
+                                    "$nroTicket", 
+                                    "-"
+                                ]
+                            }
+                        ]
+                    }, 
+                    "obraSocial" : "$cliente.obraSocial.nombre"
+                }, 
+                "detallesVentas" : { 
+                    "$push" : "$detalleVentas"
+                }, 
+                "total" : { 
+                    "$sum" : "$precioTotal"
+                }
+            }
+        }, 
+        { 
+            "$sort" : { 
+                "_id" : 1.0
+            }
+        }
+    ], 
+    { 
+        "allowDiskUse" : false
+    }
+);
+
+
 // El 4to
 db.getCollection("ventas").aggregate(
     [

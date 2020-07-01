@@ -9,16 +9,12 @@ import org.bson.BsonNull;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import com.google.gson.Gson;
-import com.jayway.jsonpath.Filter;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.AggregateIterable;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Accumulators;
-import com.mongodb.client.model.Aggregates;
-import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.DeleteResult;
 import com.unla.datos.Venta;
 
@@ -302,6 +298,65 @@ public class VentaDao {
 			                                    .append("productos", 1.0)
 			                            )
 						        );
+		List<Document> detalleVentas = new ArrayList<Document>();
+        AggregateIterable<Document> traidos = collection.aggregate(pipeline);
+		if(traidos==null) {
+			System.out.println("No hay ninguna venta entre las fechas indicadas");
+		} else {
+			MongoCursor<Document> cursor = traidos.iterator();
+			while(cursor.hasNext()) {
+				detalleVentas.add(cursor.next());
+			}
+			cursor.close();
+		}
+		return detalleVentas;
+	}
+	
+	public List<Document> traerVentasPorObraSocialEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+		List<? extends Bson> pipeline = Arrays.asList(
+                new Document()
+                        .append("$match", new Document()
+                                .append("fecha", new Document()
+                                		.append("$gte", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaDesde)))
+										.append("$lte", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaHasta)))
+                                )
+                        ), 
+                new Document()
+                        .append("$match", new Document()
+                                .append("cliente.obraSocial", new Document()
+                                        .append("$exists", true)
+                                )
+                        ), 
+                new Document()
+                        .append("$group", new Document()
+                                .append("_id", new Document()
+                                        .append("nroSucursal", new Document()
+                                                .append("$substr", Arrays.asList(
+                                                        "$nroTicket",
+                                                        0.0,
+                                                        new Document()
+                                                                .append("$indexOfBytes", Arrays.asList(
+                                                                        "$nroTicket",
+                                                                        "-"
+                                                                    )
+                                                                )
+                                                    )
+                                                )
+                                        )
+                                        .append("obraSocial", "$cliente.obraSocial.nombre")
+                                )
+                                .append("detallesVentas", new Document()
+                                        .append("$push", "$detalleVentas")
+                                )
+                                .append("total", new Document()
+                                        .append("$sum", "$precioTotal")
+                                )
+                        ), 
+                new Document()
+                        .append("$sort", new Document()
+                                .append("_id", 1.0)
+                        )
+        );
 		List<Document> detalleVentas = new ArrayList<Document>();
         AggregateIterable<Document> traidos = collection.aggregate(pipeline);
 		if(traidos==null) {
