@@ -56,9 +56,9 @@ public class TestCargaDatos {
 			System.out.println(e.getMessage());
 		}
 		try {
-			productoABM.agregar(new Producto(1, "perfumeria", "perfume", "Antonio Banderas", 500.0));
-			productoABM.agregar(new Producto(2, "perfumeria", "perfume", "Paco Rabanne", 200.0));
-			productoABM.agregar(new Producto(3, "perfumeria", "perfume", "Axe", 90.0));
+			productoABM.agregar(new Producto(1, "perfumeria", "Antonio Banderas", "Perfumeria1", 500.0));
+			productoABM.agregar(new Producto(2, "perfumeria", "Paco Rabanne", "Colonia", 200.0));
+			productoABM.agregar(new Producto(3, "perfumeria", "Axe", "Desodorante", 90.0));
 			productoABM.agregar(new Producto(4, "medicamento", "Actron", "Bayer", 100.0));
 			productoABM.agregar(new Producto(5, "medicamento", "Ibuprofeno", "Baggó", 80.0));
 			productoABM.agregar(new Producto(6, "medicamento", "Buscapina", "Bayer", 250.0));

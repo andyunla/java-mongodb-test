@@ -63,6 +63,26 @@ public class VentaABM
         return (List<Document>)VentaABM.dao.traerVentasPorObraSocialEntreFechas(fechaDesde, fechaHasta);
     }
     
+    public List<Document> traerRankingProductosPorMontoEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+        return (List<Document>)VentaABM.dao.traerRankingProductosPorMontoEntreFechas(fechaDesde, fechaHasta);
+    }
+    
+    public List<Document> traerRankingProductosPorCantidadEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+        return (List<Document>)VentaABM.dao.traerRankingProductosPorCantidadEntreFechas(fechaDesde, fechaHasta);
+    }
+    
+    public List<Document> traerCobranzasPorMedioPagoEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+        return (List<Document>)VentaABM.dao.traerCobranzasPorMedioPagoEntreFechas(fechaDesde, fechaHasta);
+    }
+    
+    public List<Document> traerRankingClientesPorMontoEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+        return (List<Document>)VentaABM.dao.traerRankingClientesPorMontoEntreFechas(fechaDesde, fechaHasta);
+    }
+    
+    public List<Document> traerRankingClientesPorCantidadEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+        return (List<Document>)VentaABM.dao.traerRankingClientesPorCantidadEntreFechas(fechaDesde, fechaHasta);
+    }
+    
     public void agregar(final Venta objeto) throws Exception {
         final Venta venta = this.traer(objeto.getNroTicket());
         if (venta != null) {

@@ -140,7 +140,7 @@ public class VentaDao {
 		return totalesVentas;
 	}
 
-	/*
+	/* 1ro
 	 * Obtenemos una colección de las ventas de cada local junto con sus totales
 	 * dado 2 fechas. También se obtiene la suma de los totales de cada local
 	 * para obtener el 'totalTodo' que es el total de la cadena completa
@@ -220,6 +220,7 @@ public class VentaDao {
 		return totalesVentas;
 	}
 	
+	// 4to
 	public List<Document> detallesVentaEntreFechaPorTipo(LocalDate fechaDesde, LocalDate fechaHasta) {
 		List<? extends Bson> pipeline = Arrays.asList(
 						                new Document()
@@ -312,6 +313,7 @@ public class VentaDao {
 		return detalleVentas;
 	}
 	
+	// 2do
 	public List<Document> traerVentasPorObraSocialEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
 		List<? extends Bson> pipeline = Arrays.asList(
                 new Document()
@@ -369,6 +371,320 @@ public class VentaDao {
 			cursor.close();
 		}
 		return detalleVentas;
+	}
+	
+	// 3ro
+	public List<Document> traerCobranzasPorMedioPagoEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+		List<? extends Bson> pipeline = Arrays.asList(
+                new Document()
+                        .append("$match", new Document()
+                                .append("fecha", new Document()
+                                		.append("$gte", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaDesde)))
+										.append("$lte", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaHasta)))
+                                )
+                        ), 
+                new Document()
+                        .append("$group", new Document()
+                                .append("_id", new Document()
+                                        .append("nroSucursal", new Document()
+                                                .append("$substr", Arrays.asList(
+                                                        "$nroTicket",
+                                                        0.0,
+                                                        new Document()
+                                                                .append("$indexOfBytes", Arrays.asList(
+                                                                        "$nroTicket",
+                                                                        "-"
+                                                                    )
+                                                                )
+                                                    )
+                                                )
+                                        )
+                                        .append("formaPago", "$formaPago")
+                                )
+                                .append("detallesVentas", new Document()
+                                        .append("$push", "$detalleVentas")
+                                )
+                                .append("total", new Document()
+                                        .append("$sum", "$precioTotal")
+                                )
+                        ), 
+                new Document()
+                        .append("$sort", new Document()
+                                .append("_id", 1.0)
+                        )
+        );
+		List<Document> detalleVentas = new ArrayList<Document>();
+        AggregateIterable<Document> traidos = collection.aggregate(pipeline);
+		if(traidos==null) {
+			System.out.println("No hay ninguna venta entre las fechas indicadas");
+		} else {
+			MongoCursor<Document> cursor = traidos.iterator();
+			while(cursor.hasNext()) {
+				detalleVentas.add(cursor.next());
+			}
+			cursor.close();
+		}
+		return detalleVentas;
+	}
+	
+	// 5to
+	public List<Document> traerRankingProductosPorMontoEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+		List<? extends Bson> pipeline = Arrays.asList(
+                new Document()
+                        .append("$match", new Document()
+                                .append("fecha", new Document()
+                                		.append("$gte", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaDesde)))
+										.append("$lte", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaHasta)))
+                                )
+                        ), 
+                new Document()
+                        .append("$group", new Document()
+                                .append("_id", new Document()
+                                        .append("$substr", Arrays.asList(
+                                                "$nroTicket",
+                                                0.0,
+                                                new Document()
+                                                        .append("$indexOfBytes", Arrays.asList(
+                                                                "$nroTicket",
+                                                                "-"
+                                                            )
+                                                        )
+                                            )
+                                        )
+                                )
+                                .append("detallesVentas", new Document()
+                                        .append("$push", "$detalleVentas")
+                                )
+                                .append("total", new Document()
+                                        .append("$sum", "$precioTotal")
+                                )
+                        ), 
+                new Document()
+                        .append("$sort", new Document()
+                                .append("_id", 1.0)
+                        ), 
+                new Document()
+                        .append("$unwind", "$detallesVentas"), 
+                new Document()
+                        .append("$unwind", "$detallesVentas"), 
+                new Document()
+                        .append("$group", new Document()
+                                .append("_id", new Document()
+                                        .append("nroSucursal", "$_id")
+                                        .append("producto", "$detallesVentas.producto.codigo")
+                                )
+                                .append("total", new Document()
+                                        .append("$sum", new Document()
+                                                .append("$multiply", Arrays.asList(
+                                                        "$detallesVentas.producto.precio",
+                                                        "$detallesVentas.cantidad"
+                                                    )
+                                                )
+                                        )
+                                )
+                        ), 
+                new Document()
+                        .append("$sort", new Document()
+                                .append("_id.nroSucursal", 1.0)
+                                .append("total", -1.0)
+                        )
+        );
+		List<Document> detalleVentas = new ArrayList<Document>();
+        AggregateIterable<Document> traidos = collection.aggregate(pipeline);
+		if(traidos==null) {
+			System.out.println("No hay ninguna venta entre las fechas indicadas");
+		} else {
+			MongoCursor<Document> cursor = traidos.iterator();
+			while(cursor.hasNext()) {
+				detalleVentas.add(cursor.next());
+			}
+			cursor.close();
+		}
+		return detalleVentas;
+	}
+	
+	// 6to
+	public List<Document> traerRankingProductosPorCantidadEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+		List<? extends Bson> pipeline = Arrays.asList(
+                new Document()
+                        .append("$match", new Document()
+                                .append("fecha", new Document()
+                                		.append("$gte", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaDesde)))
+										.append("$lte", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaHasta)))
+                                )
+                        ), 
+                new Document()
+                        .append("$group", new Document()
+                                .append("_id", new Document()
+                                        .append("$substr", Arrays.asList(
+                                                "$nroTicket",
+                                                0.0,
+                                                new Document()
+                                                        .append("$indexOfBytes", Arrays.asList(
+                                                                "$nroTicket",
+                                                                "-"
+                                                            )
+                                                        )
+                                            )
+                                        )
+                                )
+                                .append("detallesVentas", new Document()
+                                        .append("$push", "$detalleVentas")
+                                )
+                                .append("total", new Document()
+                                        .append("$sum", "$precioTotal")
+                                )
+                        ), 
+                new Document()
+                        .append("$sort", new Document()
+                                .append("_id", 1.0)
+                        ), 
+                new Document()
+                        .append("$unwind", "$detallesVentas"), 
+                new Document()
+                        .append("$unwind", "$detallesVentas"), 
+                new Document()
+                        .append("$group", new Document()
+                                .append("_id", new Document()
+                                        .append("nroSucursal", "$_id")
+                                        .append("producto", "$detallesVentas.producto.codigo")
+                                )
+                                .append("total", new Document()
+                                        .append("$sum", "$detallesVentas.cantidad")
+                                )
+                        ), 
+                new Document()
+                        .append("$sort", new Document()
+                                .append("_id.nroSucursal", 1.0)
+                                .append("total", -1.0)
+                        )
+        );
+        List<Document> detalleVentas = new ArrayList<Document>();
+        AggregateIterable<Document> traidos = collection.aggregate(pipeline);
+		if(traidos==null) {
+			System.out.println("No hay ninguna venta entre las fechas indicadas");
+		} else {
+			MongoCursor<Document> cursor = traidos.iterator();
+			while(cursor.hasNext()) {
+				detalleVentas.add(cursor.next());
+			}
+			cursor.close();
+		}
+		return detalleVentas;
+	}
+	
+	// 7mo
+	public List<Document> traerRankingClientesPorMontoEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+		List<? extends Bson> pipeline = Arrays.asList(
+                new Document()
+                        .append("$match", new Document()
+                                .append("fecha", new Document()
+                                		.append("$gte", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaDesde)))
+										.append("$lte", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaHasta)))
+                                )
+                        ), 
+                new Document()
+                        .append("$group", new Document()
+                                .append("_id", new Document()
+                                        .append("nroSucursal", new Document()
+                                                .append("$substr", Arrays.asList(
+                                                        "$nroTicket",
+                                                        0.0,
+                                                        new Document()
+                                                                .append("$indexOfBytes", Arrays.asList(
+                                                                        "$nroTicket",
+                                                                        "-"
+                                                                    )
+                                                                )
+                                                    )
+                                                )
+                                        )
+                                        .append("cliente", "$cliente")
+                                )
+                                .append("total", new Document()
+                                        .append("$sum", "$precioTotal")
+                                )
+                        ), 
+                new Document()
+                        .append("$sort", new Document()
+                                .append("_id", 1.0)
+                        ), 
+                new Document()
+                        .append("$sort", new Document()
+                                .append("_id.nroSucursal", 1.0)
+                                .append("total", -1.0)
+                        )
+        );
+        List<Document> rankingClientes = new ArrayList<Document>();
+        AggregateIterable<Document> traidos = collection.aggregate(pipeline);
+		if(traidos==null) {
+			System.out.println("No hay ninguna venta entre las fechas indicadas");
+		} else {
+			MongoCursor<Document> cursor = traidos.iterator();
+			while(cursor.hasNext()) {
+				rankingClientes.add(cursor.next());
+			}
+			cursor.close();
+		}
+		return rankingClientes;
+	}
+	
+	// 8vo
+	public List<Document> traerRankingClientesPorCantidadEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {
+		List<? extends Bson> pipeline = Arrays.asList(
+                new Document()
+                        .append("$match", new Document()
+                                .append("fecha", new Document()
+                                		.append("$gte", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaDesde)))
+										.append("$lte", MongoUtil.jsonToBSONObject(new Gson().toJson(fechaHasta)))
+                                )
+                        ), 
+                new Document()
+                        .append("$unwind", "$detalleVentas"), 
+                new Document()
+                        .append("$group", new Document()
+                                .append("_id", new Document()
+                                        .append("nroSucursal", new Document()
+                                                .append("$substr", Arrays.asList(
+                                                        "$nroTicket",
+                                                        0.0,
+                                                        new Document()
+                                                                .append("$indexOfBytes", Arrays.asList(
+                                                                        "$nroTicket",
+                                                                        "-"
+                                                                    )
+                                                                )
+                                                    )
+                                                )
+                                        )
+                                        .append("cliente", "$cliente")
+                                )
+                                .append("total", new Document()
+                                        .append("$sum", "$detalleVentas.cantidad")
+                                )
+                        ), 
+                new Document()
+                        .append("$sort", new Document()
+                                .append("_id", 1.0)
+                        ), 
+                new Document()
+                        .append("$sort", new Document()
+                                .append("_id.nroSucursal", 1.0)
+                                .append("total", -1.0)
+                        )
+        );
+        List<Document> rankingClientes = new ArrayList<Document>();
+        AggregateIterable<Document> traidos = collection.aggregate(pipeline);
+		if(traidos==null) {
+			System.out.println("No hay ninguna venta entre las fechas indicadas");
+		} else {
+			MongoCursor<Document> cursor = traidos.iterator();
+			while(cursor.hasNext()) {
+				rankingClientes.add(cursor.next());
+			}
+			cursor.close();
+		}
+		return rankingClientes;
 	}
 	
 	public List<Venta> traerEntreFechas(LocalDate fechaDesde, LocalDate fechaHasta) {

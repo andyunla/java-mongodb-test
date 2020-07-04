@@ -20,6 +20,10 @@ public class ClienteABM {
 		}
 		return instancia;
 	}
+	
+	public Cliente deserealizar(String json) {
+		return dao.deserealizar(json);
+	}
 
 	public Cliente traer(int dni) {
 		return dao.traer(dni);

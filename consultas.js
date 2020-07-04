@@ -185,6 +185,60 @@ db.getCollection("ventas").aggregate(
     }
 );
 
+// 3ro
+db.getCollection("ventas").aggregate(
+    [
+        { 
+            "$match" : { 
+                "fecha" : { 
+                    "$gte" : { 
+                        "year" : 2020.0, 
+                        "month" : 1.0, 
+                        "day" : 1.0
+                    }, 
+                    "$lte" : { 
+                        "year" : 2020.0, 
+                        "month" : 9.0, 
+                        "day" : 6.0
+                    }
+                }
+            }
+        }, 
+        { 
+            "$group" : { 
+                "_id" : { 
+                    "nroSucursal" : { 
+                        "$substr" : [
+                            "$nroTicket", 
+                            0.0, 
+                            { 
+                                "$indexOfBytes" : [
+                                    "$nroTicket", 
+                                    "-"
+                                ]
+                            }
+                        ]
+                    }, 
+                    "formaPago" : "$formaPago"
+                }, 
+                "detallesVentas" : { 
+                    "$push" : "$detalleVentas"
+                }, 
+                "total" : { 
+                    "$sum" : "$precioTotal"
+                }
+            }
+        }, 
+        { 
+            "$sort" : { 
+                "_id" : 1.0
+            }
+        }
+    ], 
+    { 
+        "allowDiskUse" : false
+    }
+);
 
 // El 4to
 db.getCollection("ventas").aggregate(
@@ -278,6 +332,280 @@ db.getCollection("ventas").aggregate(
                 "_id" : 0.0, 
                 "tipoProducto" : "$_id", 
                 "productos" : 1.0
+            }
+        }
+    ], 
+    { 
+        "allowDiskUse" : false
+    }
+);
+
+// El 5to
+db.getCollection("ventas").aggregate(
+    [
+        { 
+            "$match" : { 
+                "fecha" : { 
+                    "$gte" : { 
+                        "year" : 2020.0, 
+                        "month" : 1.0, 
+                        "day" : 1.0
+                    }, 
+                    "$lte" : { 
+                        "year" : 2020.0, 
+                        "month" : 9.0, 
+                        "day" : 6.0
+                    }
+                }
+            }
+        }, 
+        { 
+            "$group" : { 
+                "_id" : { 
+                    "$substr" : [
+                        "$nroTicket", 
+                        0.0, 
+                        { 
+                            "$indexOfBytes" : [
+                                "$nroTicket", 
+                                "-"
+                            ]
+                        }
+                    ]
+                }, 
+                "detallesVentas" : { 
+                    "$push" : "$detalleVentas"
+                }, 
+                "total" : { 
+                    "$sum" : "$precioTotal"
+                }
+            }
+        }, 
+        { 
+            "$sort" : { 
+                "_id" : 1.0
+            }
+        }, 
+        { 
+            "$unwind" : "$detallesVentas"
+        }, 
+        { 
+            "$unwind" : "$detallesVentas"
+        }, 
+        { 
+            "$group" : { 
+                "_id" : { 
+                    "nroSucursal" : "$_id", 
+                    "producto" : "$detallesVentas.producto.codigo"
+                }, 
+                "total" : { 
+                    "$sum" : { 
+                        "$multiply" : [
+                            "$detallesVentas.producto.precio", 
+                            "$detallesVentas.cantidad"
+                        ]
+                    }
+                }
+            }
+        }, 
+        { 
+            "$sort" : { 
+                "_id.nroSucursal" : 1.0, 
+                "total" : -1.0
+            }
+        }
+    ], 
+    { 
+        "allowDiskUse" : false
+    }
+);
+
+// 6to
+db.getCollection("ventas").aggregate(
+    [
+        { 
+            "$match" : { 
+                "fecha" : { 
+                    "$gte" : { 
+                        "year" : 2020.0, 
+                        "month" : 1.0, 
+                        "day" : 1.0
+                    }, 
+                    "$lte" : { 
+                        "year" : 2020.0, 
+                        "month" : 9.0, 
+                        "day" : 6.0
+                    }
+                }
+            }
+        }, 
+        { 
+            "$group" : { 
+                "_id" : { 
+                    "$substr" : [
+                        "$nroTicket", 
+                        0.0, 
+                        { 
+                            "$indexOfBytes" : [
+                                "$nroTicket", 
+                                "-"
+                            ]
+                        }
+                    ]
+                }, 
+                "detallesVentas" : { 
+                    "$push" : "$detalleVentas"
+                }, 
+                "total" : { 
+                    "$sum" : "$precioTotal"
+                }
+            }
+        }, 
+        { 
+            "$sort" : { 
+                "_id" : 1.0
+            }
+        }, 
+        { 
+            "$unwind" : "$detallesVentas"
+        }, 
+        { 
+            "$unwind" : "$detallesVentas"
+        }, 
+        { 
+            "$group" : { 
+                "_id" : { 
+                    "nroSucursal" : "$_id", 
+                    "producto" : "$detallesVentas.producto.codigo"
+                }, 
+                "total" : { 
+                    "$sum" : "$detallesVentas.cantidad"
+                }
+            }
+        }, 
+        { 
+            "$sort" : { 
+                "_id.nroSucursal" : 1.0, 
+                "total" : -1.0
+            }
+        }
+    ], 
+    { 
+        "allowDiskUse" : false
+    }
+);
+
+// 7mo
+db.getCollection("ventas").aggregate(
+    [
+        { 
+            "$match" : { 
+                "fecha" : { 
+                    "$gte" : { 
+                        "year" : 2020.0, 
+                        "month" : 1.0, 
+                        "day" : 1.0
+                    }, 
+                    "$lte" : { 
+                        "year" : 2020.0, 
+                        "month" : 9.0, 
+                        "day" : 6.0
+                    }
+                }
+            }
+        }, 
+        { 
+            "$group" : { 
+                "_id" : { 
+                    "nroSucursal" : { 
+                        "$substr" : [
+                            "$nroTicket", 
+                            0.0, 
+                            { 
+                                "$indexOfBytes" : [
+                                    "$nroTicket", 
+                                    "-"
+                                ]
+                            }
+                        ]
+                    }, 
+                    "cliente" : "$cliente"
+                }, 
+                "total" : { 
+                    "$sum" : "$precioTotal"
+                }
+            }
+        }, 
+        { 
+            "$sort" : { 
+                "_id" : 1.0
+            }
+        }, 
+        { 
+            "$sort" : { 
+                "_id.nroSucursal" : 1.0, 
+                "total" : -1.0
+            }
+        }
+    ], 
+    { 
+        "allowDiskUse" : false
+    }
+);
+
+// 8vo
+db.getCollection("ventas").aggregate(
+    [
+        { 
+            "$match" : { 
+                "fecha" : { 
+                    "$gte" : { 
+                        "year" : 2020.0, 
+                        "month" : 1.0, 
+                        "day" : 1.0
+                    }, 
+                    "$lte" : { 
+                        "year" : 2020.0, 
+                        "month" : 4.0, 
+                        "day" : 6.0
+                    }
+                }
+            }
+        }, 
+        { 
+            "$unwind" : "$detalleVentas"
+        }, 
+        { 
+            "$group" : { 
+                "_id" : { 
+                    "nroSucursal" : { 
+                        "$substr" : [
+                            "$nroTicket", 
+                            0.0, 
+                            { 
+                                "$indexOfBytes" : [
+                                    "$nroTicket", 
+                                    "-"
+                                ]
+                            }
+                        ]
+                    }, 
+                    "cliente" : "$cliente"
+                }, 
+                "total" : { 
+                    "$sum" : "$detalleVentas.cantidad"
+                }
+            }
+        }, 
+        { 
+            "$sort" : { 
+                "_id" : 1.0
+            }
+        }, 
+        { 
+            "$sort" : { 
+                "_id.nroSucursal" : 1.0, 
+                "total" : -1.0
             }
         }
     ], 
